@@ -72,3 +72,28 @@
     text-shadow: 0px 0px 20px #fff, 0px 0px 20px #614ad3;
   }
 }
+
+.heart-animated {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  animation: fly-up 1.5s ease-out forwards;
+  pointer-events: none;
+  z-index: 1000;
+  background: url("../images/pixel-heart.png") no-repeat center;
+  background-size: contain;
+  transform: translate(var(--start-x, 0px), var(--start-y, 0px));
+}
+@keyframes fly-up {
+  0% {
+    transform: translate(var(--start-x, 0px), var(--start-y, 0px)) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(
+      calc(var(--start-x, 0px) + var(--offset-x, 0px)), 
+      calc(var(--start-y, 0px))
+    ) scale(0.3);
+    opacity: 0;
+  }
+}

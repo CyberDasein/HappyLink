@@ -6,6 +6,8 @@ $white: #fff;
 $pink: #ff06de;
 $dark-pink: #c609ad;
 $light-pink: #ffd7fa;
+$light-purple: #9d0589;
+$dark-purple: #720163;
 $black: #000;
 
 @font-face {
@@ -71,6 +73,9 @@ img {
     max-width: 400px;
   }
   &__top {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
     padding: 8px;
     color: $white;
     background-color: $dark-pink;
@@ -78,6 +83,17 @@ img {
   &__text {
     background-color: $light-pink;
     padding: 20px;
+  }
+  &__close {
+    position: relative;
+    padding: 4px;
+    width: 32px;
+    height: 32px;
+    box-shadow: 2px 2px 0px 0px $dark-purple, -2px -2px 0px 0px $light-pink;
+    border: 2px solid $pink;
+    background: url("../images/pixel-heart.png") no-repeat center;
+    background-color: $light-purple;
+    cursor: pointer;
   }
   &--left {
     top: 35vh;
@@ -87,10 +103,13 @@ img {
   &--right {
     top: 30vh;
     right: 10vh;
+    z-index: 100;
   }
 }
 .person-name {
   position: relative;
+  margin: 0 auto;
+  width: max-content;
   z-index: 11;
   font-size: 110px;
   text-align: center;
