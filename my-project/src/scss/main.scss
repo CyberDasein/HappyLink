@@ -2,6 +2,9 @@
 @use "animation.scss";
 @use "animate.css";
 
+// Базовые переменные
+$base-font-size: 16px; // Базовый размер шрифта
+
 $white: #fff;
 $pink: #ff06de;
 $dark-pink: #c609ad;
@@ -10,9 +13,42 @@ $light-purple: #9d0589;
 $dark-purple: #720163;
 $black: #000;
 
+// Функция для конвертации px в rem
+@function rem($px) {
+  @return ($px / $base-font-size) * 1rem;
+}
+
 @font-face {
   font-family: "TeletactileRus";
   src: url("../fonts/TeletactileRus.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "AlphaSmart3000";
+  src: url("../fonts/AlphaSmart3000.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Moscow2024";
+  src: url("../fonts/MOSCOW2024.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PrincessDiana";
+  src: url("../fonts/Princess-Diana.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DigitalNumbers";
+  src: url("../fonts/DigitalNumbers-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -24,22 +60,96 @@ $black: #000;
   font-style: normal;
   font-display: swap;
 }
+
+// Миксины для медиа-запросов
+@mixin screen-1600 {
+  @media screen and (max-width: 1600px) {
+    @content;
+  }
+}
+
+@mixin screen-1440 {
+  @media screen and (max-width: 1440px) {
+    @content;
+  }
+}
+
+@mixin screen-1280 {
+  @media screen and (max-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin screen-1024 {
+  @media screen and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin screen-768 {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+@mixin screen-480 {
+  @media screen and (max-width: 568px) {
+    @content;
+  }
+}
+
+html {
+  font-size: $base-font-size;
+
+  @include screen-1600 {
+    font-size: 15px;
+  }
+
+  @include screen-1440 {
+    font-size: 13px;
+  }
+
+  @include screen-1280 {
+    font-size: 12px;
+  }
+
+  @include screen-1024 {
+    font-size: 10px;
+  }
+
+  @include screen-768 {
+    font-size: 12px;
+  }
+}
 body {
   position: relative;
   background: url("../images/sky2.png") no-repeat center;
   background-size: cover;
-  min-height: 100vh;
+  height: 100vh;
+  line-height: 1.2;
   background-color: $light-pink;
+  overflow: hidden;
   font-family: "TeletactileRus", sans-serif;
+
+  @include screen-768 {
+    display: flex;
+    height: 100%;
+    overflow-y: visible;
+    flex-direction: column;
+  }
 }
 
 h1 {
   color: $white;
-  font-size: 100px;
+  font-size: rem(95px);
+  line-height: 1;
   transform: rotate(4deg);
+  @include screen-768 {
+    font-size: rem(80px);
+    transform: rotate(0);
+  }
 }
 h2 {
-  font-size: 60px;
+  font-size: rem(60px);
 }
 
 img {
@@ -51,46 +161,59 @@ img {
 }
 .center-section {
   width: max-content;
-  margin-top: 10vh;
+  margin-top: 8vh;
   margin-left: auto;
   margin-right: auto;
-  padding: 30px 70px;
+  padding: rem(30px) rem(90px);
   text-align: center;
   background-color: $pink;
   transform: rotate(-4deg);
+  @include screen-768 {
+    width: 100%;
+    padding-left: rem(20px);
+    padding-right: rem(20px);
+    margin-top: 0;
+    transform: rotate(0);
+  }
 }
 .dialog {
   width: 100%;
-  max-width: 480px;
-  min-height: 182px;
+  max-width: rem(480px);
+  min-height: rem(182px);
   position: absolute;
-  border: 2px solid $pink;
-  box-shadow: -2px -2px 0px 0px $white;
-  font-size: 24px;
+  border: rem(2px) solid $pink;
+  box-shadow: rem(-2px) rem(-2px) 0px 0px $white;
+  line-height: 1.2;
+  font-size: rem(24px);
+  font-family: "AlphaSmart3000", sans-serif;
   &__img {
     display: block;
     width: 100%;
-    max-width: 400px;
+    max-width: rem(400px);
+    @include screen-768() {
+      max-width: 100%;
+    }
   }
   &__top {
     position: relative;
     display: flex;
     justify-content: space-between;
-    padding: 8px;
+    padding: rem(8px);
     color: $white;
     background-color: $dark-pink;
   }
   &__text {
     background-color: $light-pink;
-    padding: 20px;
+    padding: rem(20px);
   }
   &__close {
     position: relative;
-    padding: 4px;
-    width: 32px;
-    height: 32px;
-    box-shadow: 2px 2px 0px 0px $dark-purple, -2px -2px 0px 0px $light-pink;
-    border: 2px solid $pink;
+    padding: rem(4px);
+    width: rem(32px);
+    height: rem(32px);
+    box-shadow: rem(2px) rem(2px) 0px 0px $dark-purple,
+      rem(-2px) rem(-2px) 0px 0px $light-pink;
+    border: rem(2px) solid $pink;
     background: url("../images/pixel-heart.png") no-repeat center;
     background-color: $light-purple;
     cursor: pointer;
@@ -99,63 +222,96 @@ img {
     top: 35vh;
     left: 10vh;
     max-width: max-content;
+    @include screen-768 {
+      margin: rem(40px) auto;
+    }
   }
   &--right {
-    top: 30vh;
-    right: 10vh;
+    top: 35vh;
+    right: 4vw;
     z-index: 100;
+    @include screen-768 {
+      margin: rem(40px) auto;
+      transform: rotate(0);
+    }
+  }
+  @include screen-768 {
+    max-width: 90%;
+    position: initial;
+    animation: none;
   }
 }
 .person-name {
   position: relative;
+  max-width: 40%;
+  top: rem(-30px);
   margin: 0 auto;
   width: max-content;
   z-index: 11;
-  font-size: 110px;
+  font-size: rem(115px);
+  line-height: 1;
   text-align: center;
-  font-family: "ClassicaOne", sans-serif;
+  font-family: "PrincessDiana", sans-serif;
+  @include screen-768 {
+    max-width: 100%;
+    font-size: rem(92px);
+  }
 }
 .timer {
   width: 100%;
-  margin-top: 50px;
-  max-width: 468px;
-  min-height: 246px;
-  padding: 20px;
+  margin-top: rem(20px);
+  max-width: rem(498px);
+  min-height: rem(246px);
+  padding: rem(20px);
   background: $black;
   margin-left: auto;
   margin-right: auto;
-  border-radius: 10px;
+  border-radius: rem(10px);
+  font-family: "Moscow2024", sans-serif;
   &__inner {
-    padding: 20px;
-    border: 4px solid #657281;
-    border-radius: 10px;
+    padding: rem(20px);
+    border: rem(4px) solid #657281;
+    border-radius: rem(10px);
     background-color: #232323;
   }
   &__title {
     color: $white;
     text-align: center;
-    font-size: 30px;
-    margin-bottom: 16px;
+    font-size: rem(30px);
+    margin-bottom: rem(16px);
   }
   &__num {
-    padding: 20px;
+    padding: rem(20px);
     text-align: center;
     color: $white;
-    font-size: 60px;
-    border: 1px solid $white;
-    border-radius: 10px;
+    font-size: rem(58px);
+    background-color: $black;
+    border: rem(1px) solid $white;
+    border-radius: rem(10px);
+    font-family: "Moscow2024", sans-serif;
     span {
       display: inline-block;
-      margin-right: 12px;
-      margin-left: 12px;
+      margin-right: rem(12px);
+      margin-left: rem(12px);
       color: $pink;
+    }
+    @include screen-480 {
+      font-size: rem(42px);
     }
   }
   &__date {
-    margin-top: 16px;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: rem(16px);
     text-align: center;
-    font-size: 30px;
+    font-size: rem(30px);
+    font-family: "DigitalNumbers", sans-serif;
     color: $white;
+  }
+  @include screen-768 {
+    margin-top: auto;
+    max-width: 100%;
+    border-radius: 0;
   }
 }
 
@@ -165,6 +321,9 @@ img {
   height: calc(100% + 20vh);
   bottom: 0;
   z-index: 0;
+  @include screen-768 {
+    height: 100%;
+  }
 }
 
 .baloon {
@@ -175,74 +334,122 @@ img {
   background: url("../images/baloon-silver.png") no-repeat center;
   background-size: contain;
   &.baloon-one {
-    width: 550px;
-    height: 380px;
+    width: rem(550px);
+    height: rem(380px);
     left: 3vw;
     top: -50%;
     animation: up 5s linear forwards 3.8s;
   }
   &.baloon-two {
-    width: 500px;
-    height: 350px;
+    width: rem(500px);
+    height: rem(350px);
     top: -50%;
     left: 18vw;
     animation: up 5s linear forwards 2.8s;
   }
   &.baloon-three {
-    width: 380px;
-    height: 250px;
+    width: rem(380px);
+    height: rem(250px);
     top: -55%;
     left: 30vw;
     animation: up 5s linear forwards 1.6s;
   }
   &.baloon-four {
-    width: 540px;
-    height: 360px;
+    width: rem(540px);
+    height: rem(360px);
     top: -66%;
     left: 36vw;
     animation: up 5s linear forwards 3.8s;
   }
   &.baloon-five {
-    width: 395px;
-    height: 282px;
+    width: rem(395px);
+    height: rem(282px);
     top: -59%;
     left: 37vw;
     animation: up 5s linear forwards 2.3s;
   }
   &.baloon-six {
-    width: 425px;
-    height: 262px;
+    width: rem(425px);
+    height: rem(262px);
     top: -59%;
     right: 49vw;
     animation: up 5s linear forwards 3.65s;
   }
   &.baloon-seven {
-    width: 430px;
-    height: 295px;
+    width: rem(430px);
+    height: rem(295px);
     top: -59%;
     right: 30vw;
-    animation: up 5s linear forwards 3.5s;
+    animation: up 5s linear forwards 3.7s;
   }
   &.baloon-eight {
-    width: 433px;
-    height: 325px;
+    width: rem(433px);
+    height: rem(325px);
     top: -59%;
     right: 23vw;
     animation: up 5s linear forwards 2.85s;
   }
   &.baloon-nine {
-    width: 395px;
-    height: 282px;
+    width: rem(395px);
+    height: rem(282px);
     top: -60%;
     right: 17vw;
-    animation: up 5s linear forwards 2.5s;
+    animation: up 5s linear forwards 3.5s;
   }
   &.baloon-ten {
-    width: 585px;
-    height: 392px;
+    width: rem(585px);
+    height: rem(392px);
     top: -59%;
     right: 5vw;
     transform: rotate(5deg);
-    animation: upTwo 5s linear forwards 4s;
+    animation: upTwo 5s linear forwards 4.5s;
+  }
+  @include screen-768 {
+    &.baloon-one {
+      width: rem(275px);
+      height: rem(190px);
+      left: -15vw;
+    }
+    &.baloon-two {
+      width: rem(250px);
+      height: rem(175px);
+      left: 10vw;
+    }
+    &.baloon-three {
+      width: rem(190px);
+      height: rem(125px);
+      left: 70vw;
+    }
+    &.baloon-four {
+      width: rem(270px);
+      height: rem(180px);
+      left: 53vw;
+    }
+    &.baloon-five {
+      width: rem(197.5px);
+      height: rem(141px);
+    }
+    &.baloon-six {
+      width: rem(212.5px);
+      height: rem(131px);
+    }
+    &.baloon-seven {
+      width: rem(215px);
+      height: rem(147.5px);
+    }
+    &.baloon-eight {
+      width: rem(216.5px);
+      height: rem(162.5px);
+    }
+    &.baloon-nine {
+      width: rem(197.5px);
+      height: rem(141px);
+    }
+    &.baloon-ten {
+      width: rem(292.5px);
+      height: rem(196px);
+      right: -3vw;
+      animation: up 5s linear forwards 4s;
+    }
   }
 }

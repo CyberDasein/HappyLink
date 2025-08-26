@@ -38,7 +38,7 @@ module.exports = (env, argv) => {
               loader: 'sass-loader',
               options: {
                 sassOptions: {
-                  silenceDeprecations: ['legacy-js-api']
+                  silenceDeprecations: ['slash-div']
                 }
               }
             }

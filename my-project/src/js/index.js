@@ -1,6 +1,10 @@
 import '../scss/main.scss';
+import AgeTimer from './Timer';
 
-document.querySelectorAll('.heartBtn').forEach((el) => {
+const ageTimer = new AgeTimer('1996-08-27');
+
+const heartButtons = document.querySelectorAll('.heartBtn')
+heartButtons.forEach((el) => {
     el.addEventListener('click', function (e) {
         // Получаем координаты кнопки
         const rect = this.getBoundingClientRect();
@@ -38,4 +42,5 @@ document.querySelectorAll('.heartBtn').forEach((el) => {
 
 document.querySelector('.baloon-one').addEventListener('animationend', () => {
     document.querySelector('.baloons').style.zIndex = -1
+    heartButtons[0].click()
 });
