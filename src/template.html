@@ -11,16 +11,14 @@
     <div class="center-section">
         <h1 class="glowing-text">С Днем <br> Рождения!</h1>
     </div>
-    <div class="person-name">
-        Катюша
-    </div>
+    <div id="js-name" class="person-name"></div>
     <div class="dialog dialog--left simple-floating">
         <div class="dialog__top">
             Именниник.image
             <button class="dialog__close heartBtn"></button>
         </div>
         <p class="dialog__text">
-            <img class="dialog__img" src="./images/kate.jpg" alt="photo">
+            <img id="js-photo" loading="lazy" class="dialog__img" src="#" alt="photo">
         </p>
     </div>
     <div class="dialog rotate-floating dialog--right">
@@ -28,11 +26,7 @@
             Сообщение_от_мужа
             <button class="dialog__close heartBtn"></button>
         </div>
-        <p class="dialog__text">
-            Ты - невероятная, талантливая и самая красивая девушка на свете. Пусть этот год будет наполнен достижениями,
-            радостью и всем тем, о чем ты мечтаешь. Я всегда рядом, чтобы поддержать и вдохновить тебя. <br> С Днем рождения,
-            дорогая!
-        </p>
+        <p id="js-message" class="dialog__text"></p>
     </div>
 
     <div class="timer" id="ageTimer">
@@ -67,6 +61,9 @@
         <div class="baloon baloon-nine"></div>
         <div class="baloon baloon-ten"></div>
     </div>
+    <script>
+        window.CARD_DATA_PLACEHOLDER = {cardDataJson};
+    </script>
 </body>
 
 </html>
