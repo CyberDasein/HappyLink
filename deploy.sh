@@ -8,50 +8,40 @@ if [ ! -d "docs" ]; then
   exit 1
 fi
 
-# Получаем URL удаленного репозитория
-REMOTE_URL=$(git remote get-url origin)
-if [ -z "$REMOTE_URL" ]; then
-  echo "❌ Не найден удаленный репозиторий origin"
-  exit 1
-fi
-
-echo "🔗 Удаленный репозиторий: $REMOTE_URL"
+# Получаем URL репозитория
+REPO_URL=$(git remote get-url origin)
 
 # Создаем временную папку
 TEMP_DIR="/tmp/deploy-$(date +%s)"
 mkdir -p "$TEMP_DIR"
 
-# Клонируем репозиторий в временную папку
-echo "📥 Клонируем репозиторий..."
-git clone "$REMOTE_URL" "$TEMP_DIR"
-cd "$TEMP_DIR"
-
-# Переключаемся на ветку deploy или создаем её
-echo "🌿 Работаем с веткой deploy..."
-if git show-ref --verify --quiet refs/heads/deploy; then
-  git checkout deploy
+echo "📥 Клонируем ветку deploy..."
+# Клонируем только ветку deploy
+if git ls-remote --heads "$REPO_URL" deploy | grep -q deploy; then
+  git clone --branch deploy --single-branch "$REPO_URL" "$TEMP_DIR"
+  cd "$TEMP_DIR"
 else
+  # Если ветки deploy нет, создаем новую
+  git clone "$REPO_URL" "$TEMP_DIR"
+  cd "$TEMP_DIR"
   git checkout -b deploy
 fi
 
-# Очищаем текущее содержимое ветки deploy
-echo "🧹 Очищаем содержимое ветки deploy..."
-git rm -rf . >/dev/null 2>&1 || true
+echo "📁 Обновляем содержимое..."
+# Удаляем старые файлы (кроме .git)
+find . -not -path "./.git/*" -not -name ".git" -not -path "." -delete 2>/dev/null || true
+find . -not -path "./.git" -not -name ".git" -type d -empty -delete 2>/dev/null || true
 
-# Копируем содержимое docs из основного репозитория
-echo "📁 Копируем новое содержимое..."
+# Копируем новые файлы
 cp -r "$OLDPWD/docs"/* .
 
-# Добавляем файлы и коммитим
-echo "💾 Создаем коммит..."
+echo "💾 Коммитим изменения..."
 git add .
 git commit -m "Deploy build $(date)" || echo "ℹ️  Нет изменений для коммита"
 
-# Пушим в ветку deploy
 echo "📤 Пушим в ветку deploy..."
 git push origin deploy
 
-# Возвращаемся и очищаем
 echo "🧹 Очищаем временную папку..."
 cd "$OLDPWD"
 rm -rf "$TEMP_DIR"

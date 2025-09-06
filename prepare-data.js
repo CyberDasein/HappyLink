@@ -176,11 +176,11 @@ class YandexStorageUploader {
 
 async function processCardsData() {
   try {
-    if (!fs.existsSync('./data/cards.json')) {
-      throw new Error('Файл data/cards.json не найден');
+    if (!fs.existsSync('./data/new-cards.json')) {
+      throw new Error('Файл data/new-cards.json не найден');
     }
 
-    const cardsData = JSON.parse(fs.readFileSync('./data/cards.json', 'utf-8'));
+    const cardsData = JSON.parse(fs.readFileSync('./data/new-cards.json', 'utf-8'));
     const uploader = new YandexStorageUploader();
     
     console.log('🚀 Начинаем обработку изображений...');
@@ -230,8 +230,8 @@ async function processCardsData() {
     console.log(`\n📊 Статистика: ${successCount} успешно, ${errorCount} ошибок`);
     
     if (updated) {
-      fs.writeFileSync('./data/cards.json', JSON.stringify(cardsData, null, 2));
-      console.log('💾 Данные cards.json обновлены');
+      fs.writeFileSync('./data/new-cards.json', JSON.stringify(cardsData, null, 2));
+      console.log('💾 Данные new-cards.json обновлены');
     } else {
       console.log('ℹ️  Нет изменений для сохранения');
     }
