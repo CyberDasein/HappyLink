@@ -1,0 +1,94 @@
+.rotate-floating {
+  transform: rotate(-4deg) translateY(0px);
+  animation: float 4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.glowing-text {
+  animation: glow 1.5s alternate infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: rotate(-4deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(-4deg) translateY(-35px);
+  }
+  100% {
+    transform: rotate(-4deg) translateY(0px);
+  }
+}
+.simple-floating {
+  animation: swingFloat 6s ease infinite;
+  transform-origin: center;
+}
+
+@keyframes swingFloat {
+  0% {
+    transform: rotate(0) translateY(0px);
+  }
+  30% {
+    transform: translateX(15px) translateY(-45px);
+  }
+  70% {
+    transform: translateX(-15px) translateY(-45px);
+  }
+  100% {
+    transform: rotate(0) translateX(0) translateY(0px);
+  }
+}
+@keyframes up {
+  0% {
+    top: 100%;
+  }
+  100% {
+    top: -50%;
+  }
+}
+@keyframes upTwo {
+  0% {
+    top: 100%;
+  }
+  100% {
+    top: 7%;
+  }
+}
+@keyframes move {
+  0%, 100% {
+    transform: rotateY(0);
+  }
+  50% {
+    transform: rotateY(-45deg);
+  }
+}
+@keyframes glow {
+  from {
+    text-shadow: 0px 0px 5px #fff, 0px 0px 5px #614ad3;
+  }
+  to {
+    text-shadow: 0px 0px 20px #fff, 0px 0px 20px #614ad3;
+  }
+}
+.heart-animated {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  animation: fly-up 1.8s ease-out forwards;
+  pointer-events: none;
+  z-index: 1000;
+  background: url("../images/pixel-heart.png") no-repeat center;
+  background-size: contain;
+  transform: translate(var(--start-x, 0px), var(--start-y, 0px));
+}
+
+@keyframes fly-up {
+  0% {
+    transform: translate(var(--start-x, 0px), var(--start-y, 0px)) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(var(--start-x, 0px) + var(--offset-x, 0px)), calc(var(--start-y, 0px))) scale(0.3);
+    opacity: 0;
+  }
+}

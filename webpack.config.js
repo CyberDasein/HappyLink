@@ -61,17 +61,17 @@ function generateEntriesAndPlugins() {
   }
 
   const htmlPlugins = [];
-  const template = fs.readFileSync('./src/template.html', 'utf-8');
 
   allCards.forEach((card, index) => {
     // Используем сгенерированный путь
     const entryName = card.generatedPath;
+    const template = fs.readFileSync(`./src/templates/${card.template}-${card.gender}.html`, 'utf-8');
 
     if (entryName) {
       htmlPlugins.push(
         new HtmlWebpackPlugin({
           filename: `${entryName}/index.html`,
-          chunks: ['main'],
+          chunks: ['main', card.template],
           inject: true,
           minify: process.env.NODE_ENV === 'production' ? {
             removeComments: true,
@@ -94,6 +94,15 @@ function generateEntriesAndPlugins() {
     main: './src/js/index.js'
   };
 
+  // Добавляем CSS entry points для каждого уникального шаблона
+  const uniqueTemplates = [...new Set(allCards.map(card => card.template))];
+  uniqueTemplates.forEach(template => {
+    const cssPath = `./src/scss/${template}.scss`;
+    if (fs.existsSync(cssPath)) {
+      entries[template] = cssPath;
+    }
+  });
+  
   return { entries, htmlPlugins };
 }
 const { entries, htmlPlugins } = generateEntriesAndPlugins();
