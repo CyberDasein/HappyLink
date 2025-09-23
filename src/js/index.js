@@ -1,7 +1,12 @@
-import AgeTimer from './Timer';
+import AgeTimer from './Timer.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (window.CARD_DATA_PLACEHOLDER) {
+
+    console.log(window.CARD_DATA_PLACEHOLDER)
+    if (!window.CARD_DATA_PLACEHOLDER) {
+        throw new Error("not found CARD DATA")
+    }
+    if (window.CARD_DATA_PLACEHOLDER.template === "jumble") {
         const { name, message, photo, dateStr } = window.CARD_DATA_PLACEHOLDER;
         const nameElement = document.getElementById("js-name")
         const messageElement = document.getElementById("js-message")
@@ -21,55 +26,52 @@ document.addEventListener('DOMContentLoaded', () => {
             new AgeTimer(dateStr);
         }
 
-    } else {
-        throw new Error("not found CARD DATA")
-    }
-    const heartButtons = document.querySelectorAll('.heartBtn')
-    if (heartButtons) {
-        heartButtons.forEach((el) => {
-            el.addEventListener('click', function (e) {
-                // Получаем координаты кнопки
-                const rect = this.getBoundingClientRect();
-                const parentElement = this.parentElement;
-                // Создаем 5-7 сердечек
-                const heartCount = Math.floor(Math.random() * 3) + 5;
+        const heartButtons = document.querySelectorAll('.heartBtn')
+        if (heartButtons) {
+            heartButtons.forEach((el) => {
+                el.addEventListener('click', function (e) {
+                    // Получаем координаты кнопки
+                    const rect = this.getBoundingClientRect();
+                    const parentElement = this.parentElement;
+                    // Создаем 5-7 сердечек
+                    const heartCount = Math.floor(Math.random() * 3) + 5;
 
-                for (let i = 0; i < heartCount; i++) {
-                    // Создаем элемент сердца
-                    const heart = document.createElement('div');
-                    heart.className = 'heart-animated';
+                    for (let i = 0; i < heartCount; i++) {
+                        // Создаем элемент сердца
+                        const heart = document.createElement('div');
+                        heart.className = 'heart-animated';
 
-                    // Устанавливаем начальные координаты
-                    const startX = (Math.random() - 0.5) * rect.width;
-                    const startY = (Math.random() - 0.5) * rect.height;
-                    const offsetX = (Math.random() - 0.5) * 80;
+                        // Устанавливаем начальные координаты
+                        const startX = (Math.random() - 0.5) * rect.width;
+                        const startY = (Math.random() - 0.5) * rect.height;
+                        const offsetX = (Math.random() - 0.5) * 80;
 
-                    heart.style.setProperty('--start-x', startX + 'px');
-                    heart.style.setProperty('--start-y', startY + 'px');
-                    heart.style.setProperty('--offset-x', offsetX + 'px');
+                        heart.style.setProperty('--start-x', startX + 'px');
+                        heart.style.setProperty('--start-y', startY + 'px');
+                        heart.style.setProperty('--offset-x', offsetX + 'px');
 
-                    // Позиционируем относительно кнопки
-                    heart.style.right = 0 + 'px';
-                    heart.style.top = -rect.height + 'px';
+                        // Позиционируем относительно кнопки
+                        heart.style.right = 0 + 'px';
+                        heart.style.top = -rect.height + 'px';
 
-                    parentElement.appendChild(heart);
+                        parentElement.appendChild(heart);
 
-                    // Удаляем после анимации
-                    heart.addEventListener('animationend', () => {
-                        heart.remove();
-                    });
-                }
+                        // Удаляем после анимации
+                        heart.addEventListener('animationend', () => {
+                            heart.remove();
+                        });
+                    }
+                });
+            })
+        }
+        const baloon1 = document.querySelector('.baloon-one')
+        if (baloon1) {
+            baloon1.addEventListener('animationend', () => {
+                document.querySelector('.baloons').style.zIndex = -1
+                heartButtons[0].click()
             });
-        })
+        }
     }
-    const baloon1 = document.querySelector('.baloon-one')
-    if (baloon1) {
-        baloon1.addEventListener('animationend', () => {
-            document.querySelector('.baloons').style.zIndex = -1
-            heartButtons[0].click()
-        });
-    }
-
     if (window.CARD_DATA_PLACEHOLDER.template === "retrowave") {
         // Stars Position
         let topp = document.getElementById("top")
@@ -83,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         setStars(250)
-
         // Sun Animation
         let sunset = document.getElementById("sun");
         function synthSun(nmb) {
@@ -95,22 +96,5 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         synthSun(8)
-
-        // Full Screen Function
-        // For the "full screen" mode I used Isladjan's code from his incredible "Parallax scroll animation". (https://codepen.io/isladjan/pen/abdyPBw)
-        let fullscreen
-        let scrn = document.getElementById("fscreen")
-        scrn.addEventListener("click", function () {
-            if (!fullscreen) {
-                fullscreen = true
-                document.documentElement.requestFullscreen()
-                scrn.style.textDecoration = "line-through 2px red"
-            }
-            else {
-                fullscreen = false
-                document.exitFullscreen()
-                scrn.style.textDecoration = "none"
-            }
-        })
     }
 });

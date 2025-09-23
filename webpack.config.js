@@ -65,7 +65,7 @@ function generateEntriesAndPlugins() {
   allCards.forEach((card, index) => {
     // Используем сгенерированный путь
     const entryName = card.generatedPath;
-    const template = fs.readFileSync(`./src/templates/${card.template}-${card.gender}.html`, 'utf-8');
+    const templatePath = `./src/templates/${card.template}-${card.gender}.ejs`;
 
     if (entryName) {
       htmlPlugins.push(
@@ -77,13 +77,9 @@ function generateEntriesAndPlugins() {
             removeComments: true,
             collapseWhitespace: true,
           } : false,
-          templateContent: () => {
-            const cardDataJson = JSON.stringify(card);
-
-            let html = template
-              .replace(/{cardDataJson}/g, cardDataJson);
-
-            return html;
+          template: templatePath,
+          templateParameters: {
+            cardDataJson: card
           }
         })
       );

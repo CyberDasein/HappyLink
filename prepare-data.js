@@ -193,7 +193,7 @@ async function processCardsData() {
     for (const [index, card] of cardsData.entries()) {
       console.log(`\n--- Обработка карточки ${index + 1}/${cardsData.length}: ${card.name} ---`);
       
-      if (card.photo && !card.photo.startsWith('http')) {
+      if (card.photo && !card.photo.startsWith('https://storage.yandexcloud')) {
         const localImagePath = path.resolve(__dirname, card.photo);
         console.log(`📁 Локальный путь: ${localImagePath}`);
         
