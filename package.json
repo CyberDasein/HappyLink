@@ -7,6 +7,7 @@
     "prebuild": "node prepare-data.js",
     "build": "cross-env NODE_ENV=production webpack --mode=production",
     "start": "webpack serve --mode development",
+    "postbuild": "node ./scripts/minify-images.js",
     "deploy": "./deploy.sh",
     "prepare": "node prepare-data.js"
   },
@@ -33,7 +34,8 @@
     "style-loader": "^3.3.4",
     "webpack": "^5.90.3",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.2"
+    "webpack-dev-server": "^5.0.2",
+    "glob": "^10.3.3"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.879.0",

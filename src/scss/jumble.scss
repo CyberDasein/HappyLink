@@ -64,6 +64,7 @@ img {
   border: rem(2px) solid $pink;
   box-shadow: rem(-2px) rem(-2px) 0px 0px $white;
   line-height: 1.2;
+  background-color: $light-pink;
   font-size: rem(24px);
   font-family: "AlphaSmart3000", sans-serif;
   &__img {
@@ -110,6 +111,10 @@ img {
     top: 35vh;
     right: 4vw;
     z-index: 100;
+    .dialog__text {
+      overflow-y: auto;
+      max-height: rem(226px);
+    }
     @include screen-768 {
       margin: rem(40px) auto;
       transform: rotate(0);

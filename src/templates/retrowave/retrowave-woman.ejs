@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>retrowave</title>
+    <title>Retrowave</title>
 </head>
 
 <body>
@@ -666,11 +666,11 @@
     </div>
 
     <div id="car-inner">
-        <img id="wheel" src="/static/wheel.png" alt="wheel">
+        <img id="wheel" src="<%= images.wheel %>" alt="wheel">
         <picture id="salon">
-            <source media="(width <= 768px)" srcset="/static/car-inner-mobile.png" />
-            <source media="(width > 768px)" srcset="/static/car-inner.png" />
-            <img src="/static/car-inner.png" alt="car" />
+            <source media="(width <= 768px)" srcset="<%= images.car_inner_mobile %>" />
+            <source media="(width > 768px)" srcset="<%= images.car_inner %>" />
+            <img src="<%= images.car_inner %>" alt="car" />
         </picture>
     </div>
 

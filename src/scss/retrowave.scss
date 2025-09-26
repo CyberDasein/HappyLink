@@ -144,7 +144,7 @@ span:nth-child(2) {
   }
 }
 #neon::before {
-  content: "{";
+  content: "";
   position: absolute;
   inset: 1vw 0 0 6vw;
   transform: rotate(3deg);

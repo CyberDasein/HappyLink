@@ -1,27 +1,12 @@
 import AgeTimer from './Timer.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-
-    console.log(window.CARD_DATA_PLACEHOLDER)
     if (!window.CARD_DATA_PLACEHOLDER) {
         throw new Error("not found CARD DATA")
     }
     if (window.CARD_DATA_PLACEHOLDER.template === "jumble") {
         const { name, message, photo, dateStr } = window.CARD_DATA_PLACEHOLDER;
-        const nameElement = document.getElementById("js-name")
-        const messageElement = document.getElementById("js-message")
-        const photoElement = document.getElementById("js-photo")
-
-        if (nameElement) {
-            nameElement.textContent = name;
-        }
-        if (messageElement) {
-            messageElement.textContent = message;
-        }
-        if (photoElement && photo) {
-            photoElement.src = photo;
-            photoElement.alt = `${name}`;
-        }
+      
         if (dateStr) {
             new AgeTimer(dateStr);
         }

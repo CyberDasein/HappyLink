@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>С Днем Рождения!</title>
 </head>
+
 <body>
     <div class="center-section">
         <h1 class="glowing-text">С Днем <br> Рождения!</h1>
     </div>
-    <div id="js-name" class="person-name"><%= cardDataJson.name %></div>
+    <div id="js-name" class="person-name">
+        <%= cardDataJson.name %>
+    </div>
     <div class="dialog dialog--left simple-floating">
         <div class="dialog__top">
             Именинник.image
@@ -24,9 +28,13 @@
             Сообщение_от_мужа
             <button class="dialog__close heartBtn"></button>
         </div>
-        <p id="js-message" class="dialog__text"><%= cardDataJson.message %></p>
+        <div class="dialog__text">
+            <p id="js-message">
+                <%= cardDataJson.message %>
+            </p>
+        </div>
     </div>
-     <div class="timer" id="ageTimer">
+    <div class="timer" id="ageTimer">
         <div class="timer__inner">
             <div class="timer__title">
                 Тебе уже:
@@ -58,8 +66,8 @@
         <div class="baloon baloon-nine"></div>
         <div class="baloon baloon-ten"></div>
     </div>
-    
-   <script>
+
+    <script>
         window.CARD_DATA_PLACEHOLDER = {
             name: "<%- cardDataJson.name %>",
             message: "<%- cardDataJson.message %>",
@@ -72,4 +80,5 @@
         };
     </script>
 </body>
+
 </html>

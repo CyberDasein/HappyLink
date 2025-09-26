@@ -65,9 +65,20 @@ function generateEntriesAndPlugins() {
   allCards.forEach((card, index) => {
     // Используем сгенерированный путь
     const entryName = card.generatedPath;
-    const templatePath = `./src/templates/${card.template}-${card.gender}.ejs`;
+    const templatePath = `./src/templates/${card.template}/${card.template}-${card.gender}.ejs`;
 
     if (entryName) {
+      let extraParams = {};
+      // Автоматически подключаем все картинки из папки шаблона
+      const imagesDir = path.resolve(__dirname, `src/templates/${card.template}/images`);
+      if (fs.existsSync(imagesDir)) {
+        const imageFiles = fs.readdirSync(imagesDir).filter(f => /\.(png|jpe?g|gif|svg|webp)$/i.test(f));
+        extraParams.images = {};
+        imageFiles.forEach(img => {
+          const varName = img.replace(/\.[^.]+$/, '').replace(/[^a-zA-Z0-9_]/g, '_');
+          extraParams.images[varName] = `../assets/${img}`;
+        });
+      }
       htmlPlugins.push(
         new HtmlWebpackPlugin({
           filename: `${entryName}/index.html`,
@@ -79,7 +90,8 @@ function generateEntriesAndPlugins() {
           } : false,
           template: templatePath,
           templateParameters: {
-            cardDataJson: card
+            cardDataJson: card,
+            ...extraParams
           }
         })
       );
@@ -108,6 +120,12 @@ module.exports = (env, argv) => {
 
   return {
     entry: entries,
+    cache: {
+      type: 'filesystem',
+      buildDependencies: {
+        config: [__filename]
+      }
+    },
     output: {
       path: path.resolve(__dirname, 'docs'),
       filename: isProduction ? '[name].[contenthash].js' : '[name].js',
@@ -118,6 +136,7 @@ module.exports = (env, argv) => {
       static: './docs',
       open: true,
     },
+    devtool: isProduction ? 'source-map' : 'eval-cheap-module-source-map',
     module: {
       rules: [
         {
@@ -127,6 +146,7 @@ module.exports = (env, argv) => {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
+              cacheDirectory: true,
             },
           },
         },
@@ -164,30 +184,24 @@ module.exports = (env, argv) => {
               maxSize: 8 * 1024,
             },
           },
-          use: [
-            {
-              loader: 'image-webpack-loader',
-              options: {
-                mozjpeg: {
-                  progressive: true,
-                  quality: 80,
+          use: (function() {
+            // image-webpack-loader is slow; only enable in production builds
+            if (isProduction) {
+              return [
+                {
+                  loader: 'image-webpack-loader',
+                  options: {
+                    mozjpeg: { progressive: true, quality: 80 },
+                    optipng: { enabled: true },
+                    pngquant: { quality: [0.6, 0.8], speed: 4 },
+                    gifsicle: { interlaced: false },
+                    webp: { quality: 80 },
+                  },
                 },
-                optipng: {
-                  enabled: true,
-                },
-                pngquant: {
-                  quality: [0.6, 0.8],
-                  speed: 4,
-                },
-                gifsicle: {
-                  interlaced: false,
-                },
-                webp: {
-                  quality: 80,
-                },
-              },
-            },
-          ],
+              ];
+            }
+            return [];
+          })(),
         },
       ],
     },
@@ -195,6 +209,7 @@ module.exports = (env, argv) => {
       new MiniCssExtractPlugin({
         filename: isProduction ? '[name].[contenthash].css' : '[name].css',
       }),
+      // Images are pre-minified and copied to docs/assets by scripts/minify-images.js
       ...htmlPlugins,
     ],
     optimization: {
