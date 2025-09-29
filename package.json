@@ -9,6 +9,8 @@
     "start": "webpack serve --mode development",
     "postbuild": "node ./scripts/minify-images.js",
     "deploy": "./deploy.sh",
+    "loadJSON": "node ./scripts/db-json-storage.js load",
+    "uploadJSON": "node ./scripts/db-json-storage.js upload",
     "prepare": "node prepare-data.js"
   },
   "keywords": [],
@@ -25,6 +27,7 @@
     "ejs-loader": "^0.5.0",
     "express": "^4.18.2",
     "file-loader": "^6.2.0",
+    "glob": "^10.3.3",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.0",
     "image-webpack-loader": "^8.1.0",
@@ -34,13 +37,14 @@
     "style-loader": "^3.3.4",
     "webpack": "^5.90.3",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.2",
-    "glob": "^10.3.3"
+    "webpack-dev-server": "^5.0.2"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.879.0",
+    "@yandex-cloud/nodejs-sdk": "^2.9.0",
     "animate.css": "^4.1.1",
     "dotenv": "^17.2.1",
+    "fast-glob": "^3.3.3",
     "imagemin": "^9.0.1",
     "imagemin-mozjpeg": "^10.0.0",
     "imagemin-pngquant": "^10.0.0",

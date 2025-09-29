@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const glob = require('glob');
+const fg = require('fast-glob');
 const imageminPkg = require('imagemin');
 const imagemin = imageminPkg && imageminPkg.default ? imageminPkg.default : imageminPkg;
 const imageminPngquantPkg = require('imagemin-pngquant');
@@ -13,8 +13,15 @@ const imageminMozjpeg = imageminMozjpegPkg && imageminMozjpegPkg.default ? image
 const imageminWebp = imageminWebpPkg && imageminWebpPkg.default ? imageminWebpPkg.default : imageminWebpPkg;
 
 async function run() {
-  const srcPattern = path.resolve(__dirname, '../src/templates/**/images/*.{png,jpg,jpeg,webp,gif,svg}');
-  const files = glob.sync(srcPattern, { nodir: true });
+  const pattern = '../**/src/templates/**/images/*.{png,jpg,jpeg,webp,gif,svg}';
+  const files = await fg(pattern, {
+    cwd: __dirname,
+    absolute: true,
+    onlyFiles: true,
+  });
+
+  console.log('Found files:', files);
+
   if (!files.length) {
     console.log('No template images found to minify.');
     return;
