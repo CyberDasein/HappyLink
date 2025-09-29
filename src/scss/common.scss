@@ -4,6 +4,7 @@
 // Базовые переменные
 $base-font-size: 16px; // Базовый размер шрифта
 
+//woman
 $white: #fff;
 $pink: #ff06de;
 $dark-pink: #c609ad;
@@ -11,6 +12,8 @@ $light-pink: #ffd7fa;
 $light-purple: #9d0589;
 $dark-purple: #720163;
 $black: #000;
+
+//man
 
 // Функция для конвертации px в rem
 @function rem($px) {
