@@ -106,9 +106,11 @@ img {
   &__img {
     display: block;
     width: 100%;
+    max-height: 400px;
     max-width: rem(400px);
 
     @include screen-768() {
+      max-height: 350px;
       max-width: 100%;
     }
   }
@@ -296,164 +298,168 @@ img {
   height: calc(100% + 20vh);
   bottom: 0;
   z-index: 0;
-
-  @include screen-768 {
-    height: 100%;
-  }
 }
 
 .baloon {
   position: absolute;
   width: 70%;
   height: 100%;
-  bottom: 0;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+  will-change: transform;
+  transform: translateZ(0);
 
   body.man & {
     background-image: url("../images/baloon-purple.png");
   }
+
   body.woman & {
     background-image: url("../images/baloon-silver.png");
   }
 
   &.baloon-one {
-    width: rem(550px);
-    height: rem(380px);
+    width: rem(450px);
+    height: rem(330px);
     left: 3vw;
-    top: -50%;
-    animation: up 5s linear forwards 3.8s;
+    transform: translateY(-100%);
+    animation: up 5s linear forwards 5.8s;
   }
 
   &.baloon-two {
-    width: rem(500px);
-    height: rem(350px);
-    top: -50%;
+    width: rem(400px);
+    height: rem(300px);
     left: 18vw;
-    animation: up 5s linear forwards 2.8s;
+    transform: translateY(-100%);
+    animation: up 5s linear forwards 4.8s;
   }
 
   &.baloon-three {
-    width: rem(380px);
-    height: rem(250px);
-    top: -55%;
+    width: rem(280px);
+    height: rem(200px);
     left: 30vw;
-    animation: up 5s linear forwards 1.6s;
+    transform: translateY(-100%);
+    animation: up 5s linear forwards 3.6s;
   }
 
   &.baloon-four {
-    width: rem(540px);
-    height: rem(360px);
-    top: -66%;
+    width: rem(440px);
+    height: rem(310px);
     left: 36vw;
-    animation: up 5s linear forwards 3.8s;
+    transform: translateY(-100%);
+    animation: up 5s linear forwards 5.8s;
   }
 
   &.baloon-five {
-    width: rem(395px);
-    height: rem(282px);
-    top: -59%;
+    width: rem(295px);
+    height: rem(232px);
     left: 37vw;
-    animation: up 5s linear forwards 2.3s;
+    transform: translateY(-100%);
+    animation: up 5s linear forwards 4.3s;
   }
 
   &.baloon-six {
-    width: rem(425px);
-    height: rem(262px);
-    top: -59%;
+    width: rem(325px);
+    height: rem(212px);
     right: 49vw;
-    animation: up 5s linear forwards 3.65s;
+    transform: translateY(-100%);
+    animation: up 5s linear forwards 3.25s;
   }
 
   &.baloon-seven {
-    width: rem(430px);
-    height: rem(295px);
-    top: -59%;
+    width: rem(330px);
+    height: rem(235px);
     right: 30vw;
-    animation: up 5s linear forwards 3.7s;
+    transform: translateY(-100%);
+    animation: up 5s linear forwards 4.7s;
   }
 
   &.baloon-eight {
-    width: rem(433px);
-    height: rem(325px);
-    top: -59%;
+    width: rem(333px);
+    height: rem(295px);
     right: 23vw;
-    animation: up 5s linear forwards 2.85s;
+    transform: translateY(-100%);
+    animation: up 5s linear forwards 4.85s;
   }
 
   &.baloon-nine {
-    width: rem(395px);
-    height: rem(282px);
-    top: -60%;
+    width: rem(295px);
+    height: rem(212px);
     right: 17vw;
+    transform: translateY(-100%);
     animation: up 5s linear forwards 3.5s;
   }
 
   &.baloon-ten {
-    width: rem(585px);
-    height: rem(392px);
-    top: -59%;
+    width: rem(485px);
+    height: rem(322px);
+    top: 4vh;
     right: 5vw;
-    transform: rotate(5deg);
-    animation: upTwo 5s linear forwards 4.5s;
+    transform: translateY(-100%) rotate(5deg);
+    animation: upTwo 5s linear forwards 6.5s;
   }
 
   @include screen-768 {
     &.baloon-one {
-      width: rem(275px);
-      height: rem(190px);
-      left: -15vw;
+      width: 275px;
+      height: 190px;
+      left: -27vw;
     }
 
     &.baloon-two {
-      width: rem(250px);
-      height: rem(175px);
-      left: 10vw;
+      width: 250px;
+      height: 175px;
+      left: 0;
+      top: 10vh;
     }
 
     &.baloon-three {
-      width: rem(190px);
-      height: rem(125px);
-      left: 70vw;
+      width: 190px;
+      height: 125px;
+      left: 50vw;
     }
 
     &.baloon-four {
-      width: rem(270px);
-      height: rem(180px);
+      width: 270px;
+      height: 180px;
       left: 53vw;
     }
 
     &.baloon-five {
-      width: rem(197.5px);
-      height: rem(141px);
+      left: 42vw;
+      width: 207px;
+      height: 151px;
     }
 
     &.baloon-six {
-      width: rem(212.5px);
-      height: rem(131px);
+      width: 232px;
+      height: 131px;
     }
 
     &.baloon-seven {
-      width: rem(215px);
-      height: rem(147.5px);
+      top: -7vh;
+      right: 36vw;
+      width: 215px;
+      height: 147.5px;
     }
 
     &.baloon-eight {
-      width: rem(216.5px);
-      height: rem(162.5px);
+      right: 31vw;
+      width: 201px;
+      height: 155px;
     }
 
     &.baloon-nine {
-      width: rem(197.5px);
-      height: rem(141px);
+      top: -7vh;
+      width: 197.5px;
+      height: 141px;
     }
 
     &.baloon-ten {
-      width: rem(292.5px);
-      height: rem(196px);
+      width: 292.5px;
+      height: 196px;
       right: -3vw;
-      animation: up 5s linear forwards 4s;
+      animation: up 7s linear forwards 4s;
     }
   }
 }

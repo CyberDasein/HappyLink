@@ -38,19 +38,19 @@
 }
 @keyframes up {
   0% {
-    top: 100%;
+    transform: translateY(100vh);
   }
   100% {
-    top: -50%;
+    transform: translateY(-50%);
   }
 }
 
 @keyframes upTwo {
   0% {
-    top: 100%;
+    transform: translateY(100vh) rotate(5deg);
   }
   100% {
-    top: 7%;
+    transform: translateY(7vh) rotate(5deg);
   }
 }
 
