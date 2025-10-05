@@ -1,4 +1,4 @@
-@use "common" as *;
+@use "common"as *;
 
 html,
 body,
@@ -87,18 +87,13 @@ video {
 picture {
   margin: 0;
 }
-@font-face {
-  font-family: "Streamster";
-  src: url("//db.onlinewebfonts.com/t/c86f6e311c62f1ee74affa41d9c3686f.woff")
-      format("woff"),
-    url("//db.onlinewebfonts.com/t/c86f6e311c62f1ee74affa41d9c3686f.woff2")
-      format("woff2");
-}
+
 * {
   margin: auto;
   padding: 0;
   cursor: default;
 }
+
 body {
   width: 100vw;
   height: 100vh;
@@ -106,28 +101,41 @@ body {
   background: #09090e;
   overflow: hidden;
 }
+
 #neon {
   margin-top: 10vh;
   width: 50vw;
-  height: 18vw;
   max-height: 60vh;
-  color: #fff;
   text-align: center;
-  font-family: streamster;
-  font-size: 10vw;
-  text-shadow: 0 0 8px #fff, 0 0 24px #fff, 0 0 32px #f80022, 0 0 40px #f80022;
+  font-family: Damion;
+  font-size: rem(130px);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ee91ae;
+  text-shadow: 1px 1px #fff, -1px -1px #fff, -1px 1px #fff, 1px -1px #fff, 1px 0px #fff, -1px 0px #fff, 0px -1px #fff, 0px 1px #fff, 0px 0px 12px #ee91ae;
   position: absolute;
   inset: 0;
   transform: rotate(-8deg);
   z-index: 100;
+
+  @include screen-1024 {
+    font-size: 90px;
+  }
+  @include screen-768 {
+    font-size: 50px;
+  }
 }
+
 span:nth-child(1) {
   animation: neon 1.7s infinite alternate;
 }
+
 span:nth-child(2) {
   animation: neon 1.7s infinite alternate-reverse;
 }
+
 @keyframes neon {
+
   0%,
   18%,
   22%,
@@ -135,59 +143,78 @@ span:nth-child(2) {
   58%,
   62%,
   100% {
-    text-shadow: 0 0 8px #fff, 0 0 24px #fff, 0 0 32px #f80022, 0 0 40px #f80022;
+    text-shadow: 1px 1px #fff, -1px -1px #fff, -1px 1px #fff, 1px -1px #fff, 1px 0px #fff, -1px 0px #fff, 0px -1px #fff, 0px 1px #fff, 0px 0px 12px #ee91ae;
   }
+
   20%,
   24%,
   60% {
     text-shadow: none;
   }
 }
-#neon::before {
-  content: "";
+
+.grid-container {
   position: absolute;
-  inset: 1vw 0 0 6vw;
-  transform: rotate(3deg);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  perspective: 300px;
 }
+
 #grid {
-  width: 180%;
+  width: 100%;
   height: 100%;
   background: #8000804d;
   display: grid;
-  grid-template: repeat(16, 1fr) / repeat(40, 1fr);
+  grid-template-columns: repeat(40, 1fr);
+  grid-template-rows: repeat(16, 1fr);
   position: absolute;
-  inset: 0 0 -15% -40%;
-  transform: perspective(60vh) rotateX(75deg) translateY(-6.25vh);
+  top: 5vh;
+  left: 0;
+  transform: rotateX(75deg) scale(0.7);
   animation: gridz 0.8s infinite linear;
-}
-@keyframes gridz {
-  100% {
-    transform: perspective(60vh) rotateX(75deg) translateY(6.25vh);
+
+  @include screen-768 {
+    top: 10px;
   }
 }
+
+@keyframes gridz {
+  100% {
+    transform: rotateX(75deg) scale(0.7) translateY(6.25%);
+  }
+}
+
 #grid div {
   width: 100%;
   height: 100%;
   border: 1px solid #ccc;
   filter: blur(1px);
 }
+
 #top {
   width: 100%;
   height: 50%;
-  background: linear-gradient(
-    #0d0221 0%,
-    #45125e 40%,
-    #a22561 80%,
-    #ff3864 100%
-  );
+  background: linear-gradient(#0d0221 0%,
+      #45125e 40%,
+      #a22561 80%,
+      #ff3864 100%);
   box-shadow: 0 0 100px purple, 0 0 200px purple;
+
+  @include screen-768 {
+    height: 46%;
+  }
 }
+
 .stars {
   width: 1px;
   height: 1px;
   background: #fff;
   position: absolute;
 }
+
 #sun {
   width: 40vw;
   max-width: 40vh;
@@ -201,6 +228,7 @@ span:nth-child(2) {
   overflow: hidden;
   z-index: 10;
 }
+
 .sun {
   height: 0;
   width: 100%;
@@ -209,27 +237,34 @@ span:nth-child(2) {
   transform: translateY(6vh);
   animation: sunset 6s linear infinite;
 }
+
 @keyframes sunset {
+
   0%,
   5% {
     background: #45125e;
     opacity: 0;
   }
+
   10% {
     opacity: 1;
   }
+
   70% {
     background: #a22561;
   }
+
   100% {
     height: 4vh;
     background: #e03263;
     transform: translateY(40vh);
   }
 }
+
 #mountain::before {
   content: "";
   width: 100vw;
+  max-width: 1368px;
   height: 4px;
   background: #fff;
   box-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 24px #af62ff, 0 0 32px #af62ff;
@@ -237,6 +272,7 @@ span:nth-child(2) {
   filter: blur(1px);
   z-index: 20;
 }
+
 #mountain div {
   background: linear-gradient(#090910 40%, #450547 100%);
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
@@ -249,68 +285,64 @@ span:nth-child(2) {
   max-height: 6vh;
   inset: auto auto 50% -5%;
 }
+
 #mountain div:nth-child(2) {
   width: 24vw;
   height: 8vw;
   max-height: 8vh;
   inset: auto auto 50% 5%;
 }
+
 #mountain div:nth-child(3) {
   width: 30vw;
   height: 10vw;
   max-height: 10vh;
   inset: auto auto 50% 15%;
 }
+
 #mountain div:nth-child(4) {
   width: 30vw;
   height: 18vw;
   max-height: 18vh;
   inset: auto auto 50% 30%;
+
 }
+
 #mountain div:nth-child(5) {
   width: 30vw;
   height: 26vw;
   max-height: 26vh;
   inset: auto 30% 50% auto;
+
 }
+
 #mountain div:nth-child(6) {
   width: 30vw;
   height: 10vw;
   max-height: 10vh;
   inset: auto 15% 50% auto;
   z-index: 9;
+
 }
+
 #mountain div:nth-child(7) {
   width: 24vw;
   height: 8vw;
   max-height: 8vh;
   inset: auto 5% 50% auto;
   z-index: 8;
+
 }
+
 #mountain div:nth-child(8) {
   width: 24vw;
   height: 6vw;
   max-height: 6vh;
   inset: auto -5% 50% auto;
   z-index: 7;
+
 }
-#fscreen {
-  padding: 8px 12px;
-  background-color: transparent;
-  font-family: consolas;
-  border: 1px solid #fff;
-  border-radius: 4px;
-  font-size: 1.2em;
-  color: #fff;
-  position: fixed;
-  inset: auto 5% 5% auto;
-  cursor: pointer;
-  transition: 0.2s;
-  z-index: 1001;
-}
-#fscreen:hover {
-  text-shadow: 0 0 8px #fff, 0 0 16px #fff, 0 0 24px #fff;
-}
+
 #car-inner {
   position: relative;
   display: flex;
@@ -320,28 +352,35 @@ span:nth-child(2) {
   position: relative;
   z-index: 1001;
   animation: carShake 3s ease-in-out infinite;
+
   img {
     margin: 0;
     height: 100%;
     object-fit: cover;
-     @include screen-768 {
+
+    @include screen-768 {
       width: 100%;
-     }
+    }
   }
+
   #salon {
     width: 100%;
     position: relative;
     bottom: -25px;
+
     img {
       width: 100%;
       object-fit: cover;
     }
+
     @include screen-768 {
       width: 100%;
+      max-height: 50vh;
       margin: 0;
       bottom: -10vh;
     }
   }
+
   #wheel {
     position: absolute;
     animation: steerRotation 7s ease-in-out infinite;
@@ -361,41 +400,49 @@ span:nth-child(2) {
     }
   }
 }
-@media screen and (max-height: 740px) {
-  #neon {
-    width: 30vw;
-    height: 10.8vw;
-    font-size: 6vw;
-  }
-}
+
+
 @keyframes steerRotation {
   0% {
     transform: rotate(0deg);
   }
+
   25% {
-    transform: rotate(12deg); /* Поворот вправо */
+    transform: rotate(12deg);
+    /* Поворот вправо */
   }
+
   50% {
-    transform: rotate(0deg); /* Возврат в центр */
+    transform: rotate(0deg);
+    /* Возврат в центр */
   }
+
   75% {
-    transform: rotate(-10deg); /* Поворот влево */
+    transform: rotate(-10deg);
+    /* Поворот влево */
   }
+
   100% {
-    transform: rotate(0deg); /* Возврат в центр */
+    transform: rotate(0deg);
+    /* Возврат в центр */
   }
 }
+
 @keyframes carShake {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   25% {
     transform: translateY(-10px);
   }
+
   50% {
     transform: translateY(22px);
   }
+
   75% {
     transform: translateY(-5px);
   }

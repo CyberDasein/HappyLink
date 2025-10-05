@@ -9,8 +9,7 @@ function generateRandomPath(path, index) {
   let result = '';
 
   // Базовая часть из имени
-  const namePart = path.toLowerCase()
-    .replace(/[^a-zа-яё]/g, '')
+  const namePart = path.toLowerCase().replace(/[^a-zа-яё]/g, '');
 
   // Добавляем случайные буквы
   for (let i = 0; i < 9; i++) {
@@ -82,7 +81,7 @@ function generateEntriesAndPlugins() {
       htmlPlugins.push(
         new HtmlWebpackPlugin({
           filename: `${entryName}/index.html`,
-          chunks: ['main', card.template],
+          chunks: ['main', card.template], // <-- подключаем main + шаблон
           inject: true,
           minify: process.env.NODE_ENV === 'production' ? {
             removeComments: true,
@@ -99,20 +98,29 @@ function generateEntriesAndPlugins() {
   });
 
   const entries = {
-    main: './src/js/index.js'
+    main: './src/js/index.js' // <-- основной файл
   };
 
-  // Добавляем CSS entry points для каждого уникального шаблона
+  // Добавляем JS entry points для каждого уникального шаблона
   const uniqueTemplates = [...new Set(allCards.map(card => card.template))];
+  uniqueTemplates.forEach(template => {
+    const jsPath = `./src/js/templates/${template}.js`;
+    if (fs.existsSync(jsPath)) {
+      entries[template] = jsPath; // <-- добавляем JS шаблона как отдельный бандл
+    }
+  });
+
+  // Добавляем CSS entry points для каждого уникального шаблона
   uniqueTemplates.forEach(template => {
     const cssPath = `./src/scss/${template}.scss`;
     if (fs.existsSync(cssPath)) {
-      entries[template] = cssPath;
+      entries[template] = [entries[template] || [], cssPath].flat();
     }
   });
-  
+
   return { entries, htmlPlugins };
 }
+
 const { entries, htmlPlugins } = generateEntriesAndPlugins();
 
 module.exports = (env, argv) => {
@@ -134,6 +142,8 @@ module.exports = (env, argv) => {
     },
     devServer: {
       static: './docs',
+      host: '0.0.0.0',
+      port: 3000,
       open: true,
     },
     devtool: isProduction ? 'source-map' : 'eval-cheap-module-source-map',
@@ -209,12 +219,35 @@ module.exports = (env, argv) => {
       new MiniCssExtractPlugin({
         filename: isProduction ? '[name].[contenthash].css' : '[name].css',
       }),
-      // Images are pre-minified and copied to docs/assets by scripts/minify-images.js
       ...htmlPlugins,
     ],
     optimization: {
       splitChunks: {
         chunks: 'all',
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            priority: 10,
+            chunks: 'all',
+          },
+          // Разделение по шаблонам
+          templates: {
+            test: /[\\/]src[\\/]js[\\/]templates[\\/]/,
+            name: (module) => {
+              const path = module.context;
+              if (path) {
+                const match = path.match(/templates[\\/]([a-zA-Z0-9_-]+)/);
+                if (match) {
+                  return match[1]; // имя шаблона
+                }
+              }
+              return 'shared';
+            },
+            chunks: 'all',
+            enforce: true,
+          },
+        },
       },
     },
   };

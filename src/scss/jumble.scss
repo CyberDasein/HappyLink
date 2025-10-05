@@ -8,7 +8,6 @@ body {
   background-size: cover;
   height: 100vh;
   line-height: 1.2;
-
   overflow: hidden;
   font-family: "TeletactileRus", sans-serif;
 
@@ -173,6 +172,9 @@ img {
     left: 10vh;
     max-width: max-content;
 
+    @include screen-1024 {
+      left: 6vh;
+    }
     @include screen-768 {
       margin: rem(40px) auto;
     }
@@ -186,6 +188,10 @@ img {
     .dialog__text {
       overflow-y: auto;
       max-height: rem(226px);
+    }
+
+    @include screen-1024 {
+     right: 2vw;
     }
 
     @include screen-768 {
@@ -249,7 +255,7 @@ img {
     padding: rem(20px);
     text-align: center;
     color: $white;
-    font-size: rem(58px);
+    font-size: rem(56px);
     background-color: $black;
     border: rem(1px) solid $white;
     border-radius: rem(10px);
@@ -298,6 +304,10 @@ img {
   height: calc(100% + 20vh);
   bottom: 0;
   z-index: 0;
+  @include screen-1024 {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
 }
 
 .baloon {
@@ -420,9 +430,9 @@ img {
     }
 
     &.baloon-four {
-      width: 270px;
+      width: 110px;
       height: 180px;
-      left: 53vw;
+      left: 72vw;
     }
 
     &.baloon-five {
@@ -456,9 +466,9 @@ img {
     }
 
     &.baloon-ten {
-      width: 292.5px;
+      width: 150px;
       height: 196px;
-      right: -3vw;
+      right: 24vw;
       animation: up 7s linear forwards 4s;
     }
   }
