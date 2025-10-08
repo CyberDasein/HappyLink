@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "prebuild": "node prepare-data.js",
-    "build": "cross-env NODE_ENV=production webpack --mode=production",
+    "build": "env NODE_ENV=production webpack --mode=production",
     "start": "webpack serve --mode development",
     "postbuild": "node ./scripts/minify-images.js",
-    "deploy": "node ./deploy.sh",
+    "deploy": "./deploy.sh",
     "loadJSON": "node ./scripts/db-json-storage.js load",
     "uploadJSON": "node ./scripts/db-json-storage.js upload",
     "prepare": "node prepare-data.js"
