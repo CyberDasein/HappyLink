@@ -98,7 +98,7 @@ $black: #000;
     @content;
   }
 }
-@mixin screen-480 {
+@mixin screen-568 {
   @media screen and (max-width: 568px) {
     @content;
   }

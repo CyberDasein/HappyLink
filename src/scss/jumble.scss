@@ -14,11 +14,72 @@ body {
   &.woman {
     background-image: url("../images/sky-pink.png");
     background-color: $light-pink;
+
+    @include screen-568 {
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 17%;
+        left: -26px;
+        width: 106px;
+        height: 106px;
+        background: url("../images/flower-1.png") no-repeat center;
+        background-size: cover;
+        z-index: -1;
+      }
+
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 17%;
+        right: 0;
+        width: 86px;
+        height: 86px;
+        background: url("../images/flower-2.png") no-repeat center;
+        background-size: cover;
+        z-index: -1;
+      }
+
+      background-image: url("../images/sky-pink-mobile.png");
+    }
   }
 
   &.man {
     background-color: #E8FFE0;
     background-image: url("../images/sky-blue.png");
+
+    @include screen-568 {
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 15%;
+        left: -26px;
+        width: 76px;
+        height: 106px;
+        background: url("../images/man-bg-item-1.png") no-repeat center;
+        background-size: cover;
+        z-index: -1;
+      }
+
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 16%;
+        right: 4%;
+        width: 45px;
+        height: 60px;
+        background: url("../images/man-bg-item-2.png") no-repeat center;
+        background-size: cover;
+        transform: rotate(10deg);
+        z-index: -1;
+      }
+
+      background-image: url("../images/sky-blue-mobile.png");
+    }
   }
 
   @include screen-768 {
@@ -38,6 +99,10 @@ h1 {
   @include screen-768 {
     font-size: rem(80px);
     transform: rotate(0);
+  }
+
+  @include screen-568 {
+    font-size: rem(68px);
   }
 }
 
@@ -83,7 +148,7 @@ img {
 .dialog {
   width: 100%;
   max-width: rem(480px);
-  min-height: rem(182px);
+  min-height: 290px;
   position: absolute;
   border: rem(2px) solid transparent;
   box-shadow: rem(-2px) rem(-2px) 0px 0px $white;
@@ -175,8 +240,13 @@ img {
     @include screen-1024 {
       left: 6vh;
     }
+
     @include screen-768 {
       margin: rem(40px) auto;
+    }
+
+    @include screen-568 {
+      margin-top: rem(100px);
     }
   }
 
@@ -191,7 +261,7 @@ img {
     }
 
     @include screen-1024 {
-     right: 2vw;
+      right: 2vw;
     }
 
     @include screen-768 {
@@ -222,6 +292,10 @@ img {
   @include screen-768 {
     max-width: 100%;
     font-size: rem(92px);
+  }
+
+  @include screen-568 {
+    font-size: rem(70px);
   }
 }
 
@@ -276,7 +350,7 @@ img {
       }
     }
 
-    @include screen-480 {
+    @include screen-568 {
       font-size: rem(42px);
     }
   }
@@ -304,6 +378,7 @@ img {
   height: calc(100% + 20vh);
   bottom: 0;
   z-index: 0;
+
   @include screen-1024 {
     max-width: 100vw;
     overflow-x: hidden;
