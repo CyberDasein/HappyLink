@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С Днем Рождения!</title>
+</head>
+
+<body class="<%= cardDataJson.gender %>">
+        <h1>test</h1>
+
+    <script>
+        window.CARD_DATA_PLACEHOLDER = {
+            name: "<%- cardDataJson.name %>",
+            message: "<%- cardDataJson.message %>",
+            photo: "<%- cardDataJson.photo %>",
+            dateStr: "<%- cardDataJson.dateStr %>",
+            path: "<%- cardDataJson.path %>",
+            template: "<%- cardDataJson.template %>",
+            gender: "<%- cardDataJson.gender %>",
+            generatedPath: "<%- cardDataJson.generatedPath %>"
+        };
+    </script>
+</body>
+
+</html>

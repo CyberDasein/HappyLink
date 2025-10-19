@@ -1,6 +1,7 @@
 const templateInitMap = {
   jumble: () => import('./templates/jumble.js'),
   retrowave: () => import('./templates/retrowave.js'),
+  terminal: () => import('./templates/terminal.js')
 };
 
 document.addEventListener('DOMContentLoaded', async () => {

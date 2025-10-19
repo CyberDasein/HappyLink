@@ -128,12 +128,7 @@ module.exports = (env, argv) => {
 
   return {
     entry: entries,
-    cache: {
-      type: 'filesystem',
-      buildDependencies: {
-        config: [__filename]
-      }
-    },
+   cache: false,
     output: {
       path: path.resolve(__dirname, 'docs'),
       filename: isProduction ? '[name].[contenthash].js' : '[name].js',
