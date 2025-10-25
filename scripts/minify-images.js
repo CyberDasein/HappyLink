@@ -1,18 +1,24 @@
 const path = require('path');
 const fs = require('fs');
 const fg = require('fast-glob');
-const imageminPkg = require('imagemin');
-const imagemin = imageminPkg && imageminPkg.default ? imageminPkg.default : imageminPkg;
-const imageminPngquantPkg = require('imagemin-pngquant');
-const imageminMozjpegPkg = require('imagemin-mozjpeg');
-const imageminWebpPkg = require('imagemin-webp');
-
-// Some versions export the plugin factory as .default
-const imageminPngquant = imageminPngquantPkg && imageminPngquantPkg.default ? imageminPngquantPkg.default : imageminPngquantPkg;
-const imageminMozjpeg = imageminMozjpegPkg && imageminMozjpegPkg.default ? imageminMozjpegPkg.default : imageminMozjpegPkg;
-const imageminWebp = imageminWebpPkg && imageminWebpPkg.default ? imageminWebpPkg.default : imageminWebpPkg;
 
 async function run() {
+  // Dynamic imports for ES modules
+  const { default: imageminPkg } = await import('imagemin');
+  const imageminPngquantPkgModule = await import('imagemin-pngquant');
+  const imageminMozjpegPkgModule = await import('imagemin-mozjpeg');
+  const imageminWebpPkgModule = await import('imagemin-webp');
+
+  const imagemin = imageminPkg && imageminPkg.default ? imageminPkg.default : imageminPkg;
+  // Some versions export the plugin factory as .default
+  const imageminPngquantPkg = imageminPngquantPkgModule.default && imageminPngquantPkgModule.default.default ? imageminPngquantPkgModule.default.default : imageminPngquantPkgModule.default;
+  const imageminMozjpegPkg = imageminMozjpegPkgModule.default && imageminMozjpegPkgModule.default.default ? imageminMozjpegPkgModule.default.default : imageminMozjpegPkgModule.default;
+  const imageminWebpPkg = imageminWebpPkgModule.default && imageminWebpPkgModule.default.default ? imageminWebpPkgModule.default.default : imageminWebpPkgModule.default;
+  
+  const imageminPngquant = imageminPngquantPkg;
+  const imageminMozjpeg = imageminMozjpegPkg;
+  const imageminWebp = imageminWebpPkg;
+
   const pattern = '../**/src/templates/**/images/*.{png,jpg,jpeg,webp,gif,svg}';
   const files = await fg(pattern, {
     cwd: __dirname,

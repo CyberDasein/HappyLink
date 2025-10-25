@@ -1,24 +1,68 @@
-@use "common"as *;
+@use "common" as *;
 
 body {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  height: 100vh;
+  overflow: hidden;
+  background-attachment: fixed;
+  transition: background-position 0.2s ease-out;
+  animation: filterBackground 11s ease-in-out infinite alternate;
+
   &.woman {
-     background-image: url("../images/terminal-woman_bg.png");
-     background-color: #3C1236;
+    background-color: #3C1236;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('../images/terminal-woman_bg.png');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      background-repeat: no-repeat;
+      animation: filterBackground 15s ease-in-out infinite alternate;
+      z-index: -1;
+    }
+  }
+
+  &.man {
+    background-color: #C0C0C0;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('../images/terminal-man_bg2.png');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      background-repeat: no-repeat;
+      animation: filterBackground 15s ease-in-out infinite alternate;
+      z-index: -1;
+    }
   }
 }
 
 .center-section {
   max-width: max-content;
   margin: 0 auto;
-  margin-top: 40px;
-
+  padding-top: 40px;
 }
 
 .terminal-card-container {
   position: relative;
+
+  @include screen-568 {
+    width: 320px;
+  }
 }
 
 .terminal-img {}
@@ -27,17 +71,34 @@ body {
   position: absolute;
   max-width: 78%;
   overflow: hidden;
-  color: $pink;
   top: 7%;
   left: 60px;
 
+  body.man & {
+    color: $blue;
+  }
+
+  body.woman & {
+    color: $pink;
+  }
+
   &__text {
     display: inline-block;
-    animation: marquee-scroll 10s linear infinite;
+    animation: marquee-scroll 9s linear infinite;
     font-size: 70px;
     font-family: AlphaSmart3000, sans-serif;
     text-shadow: 0px 4px 4px rgba(255, 219, 250, 0.4);
     white-space: nowrap;
+
+    @include screen-568 {
+      font-size: 44px;
+    }
+  }
+
+  @include screen-568 {
+    top: 40px;
+    left: 30px;
+    max-width: 81%;
   }
 }
 
@@ -48,6 +109,7 @@ body {
   width: 294px;
   height: 540px;
   font-family: Rosencrantz;
+  font-size: 18px;
   text-transform: uppercase;
   color: black;
   overflow: hidden;
@@ -55,9 +117,15 @@ body {
   &__wrap {
     height: 100%;
     background-color: #fff;
-    background: linear-gradient(180deg, #7C5E7C 0%, #E0CBE0 10%, #EBDEEB 20%, #FFFFFF 30%, #FFFFFF 50%, #FFFFFF 70%, #EBDEEB 80%, #E0CBE0 90%, #7C5E7C 100%);
     padding: 32px 24px;
     animation: vertical-scroll 10s linear forwards;
+
+    body.man & {
+      background: linear-gradient(180deg, #494949 0%, #9EA4B7 10%, #D0D5E5 20%, #FFFFFF 30%, #FFFFFF 50%, #FFFFFF 70%, #D0D5E5 80%, #9EA4B7 90%, #494949 100%);
+    }
+    body.woman & {
+      background: linear-gradient(180deg, #7C5E7C 0%, #E0CBE0 10%, #EBDEEB 20%, #FFFFFF 30%, #FFFFFF 50%, #FFFFFF 70%, #EBDEEB 80%, #E0CBE0 90%, #7C5E7C 100%);
+    }
   }
 
   &__top {
@@ -84,5 +152,11 @@ body {
     height: 1px;
     border-top: 1px dashed #000;
     margin-bottom: 8px;
+  }
+
+  @include screen-568 {
+    left: 50px;
+    width: 220px;
+    font-size: 16px;
   }
 }

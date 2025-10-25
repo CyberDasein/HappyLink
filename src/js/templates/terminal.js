@@ -3,7 +3,7 @@ export default function initTerminal(cardData) {
 
     // Преобразуем строку даты в объект Date
     const birthDate = new Date(dateStr);
-    
+
     // Форматируем дату: "14 АПРЕЛЯ 2025"
     const formattedDate = formatDate(birthDate);
 

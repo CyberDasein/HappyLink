@@ -8,8 +8,69 @@
 </head>
 
 <body class="<%= cardDataJson.gender %>">
-        <h1>test</h1>
+  
+    <div class="center-section">
+        <div class="terminal-card-container">
+            <img class="terminal-img" src="<%= images.terminal %>" alt="termainal">
 
+            <div class="crawl-line">
+                <div class="crawl-line__text">Поздравляем с днем Рождения!</div>
+            </div>
+            <div class="terminal-list">
+                <div class="terminal-list__wrap">
+                    <div class="terminal-list__top">
+                        <p>ОТЧЁТ О ПОЗДРАВЛЕНИИ</p>
+                        <p>НОМЕР: #BIRTHDAY_x</p>
+                        <p>ДАТА: xx АПРЕЛЯ xxxx</p>
+                        <p>КОЛИЧЕСТВО ЛЕТ: xx</p>
+                    </div>
+                    <div class="terminal-list__text">
+                        <div class="terminal-list__line">
+                            <span>Позиция</span><span>Количество</span> 
+                        </div>
+                        <div class="line"></div>
+                         <div class="terminal-list__line">
+                            <span>СМЕХ</span><span>∞</span> 
+                        </div>
+                         <div class="terminal-list__line">
+                            <span>СОЛНЦЕ</span><span>100%</span> 
+                        </div>
+                         <div class="terminal-list__line">
+                            <span>УСПЕХ</span><span>100%</span> 
+                        </div>
+                         <div class="terminal-list__line">
+                            <span>ПОЗИТИВ</span><span>365 дней/год</span> 
+                        </div>
+                         <div class="terminal-list__line">
+                            <span>ЛЮБОВЬ</span><span>24/7</span> 
+                        </div>
+                         <div class="terminal-list__line">
+                            <span>СЕКРЕТЫ УДАЧИ</span><span>1 шт.</span> 
+                        </div>
+                         <div class="terminal-list__line">
+                            <span>ДРУЖЕСКИЕ ПОДДЕРЖКИ</span><span>999+</span> 
+                        </div>
+                        <div class="line"></div>
+                         <div class="terminal-list__line">
+                            <span>ИТОГО:</span><span>БЕЗГРАНИЧНО</span> 
+                        </div>
+                         <div class="terminal-list__line">
+                            <span>ОПЛАЧЕНО:</span><span>ПОЛНОСТЬЮ</span> 
+                        </div>
+                         <div class="terminal-list__line">
+                            <span>ДРУЖЕСКИЕ ПОДДЕРЖКИ</span><span>999+</span> 
+                        </div>
+                         <div class="terminal-list__line">
+                            <span>ИМЕННИННИК: &nbsp; <%- cardDataJson.name %></span>
+                        </div>
+                         <div class="terminal-list__line">
+                            <span>ПОЗДРАВИТЕЛЬ: &nbsp; <%- cardDataJson.sender_ip %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
     <script>
         window.CARD_DATA_PLACEHOLDER = {
             name: "<%- cardDataJson.name %>",
