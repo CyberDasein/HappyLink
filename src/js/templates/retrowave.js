@@ -6,7 +6,7 @@ export default function initRetrowave() {
       let stars = document.createElement("div");
       stars.setAttribute("class", "stars");
       stars.style.left = 100 * Math.random() + "%";
-      stars.style.top = 55 * Math.random() + "%";
+      stars.style.top = 49 * Math.random() + "%";
       topp.appendChild(stars);
     }
   }
