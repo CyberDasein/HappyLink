@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>С Днем Рождения!</title>
+    <meta property="og:title" content="С днём рождения, <%= cardDataJson.name %>! 🎉 Только для тебя 🎂" />
+    <meta property="og:description" content="Открытка, наполненная светом и теплом. С днём рождения, счастья тебе!" />
+    <meta property="og:url" content="/" />
+    <title>С днём рождения, <%= cardDataJson.name %>!</title>
 </head>
 
 <body class="<%= cardDataJson.gender %>">

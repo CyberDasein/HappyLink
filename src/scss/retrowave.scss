@@ -19,6 +19,18 @@ body {
   background: linear-gradient(180deg, #0f0c29, #302b63, #24243e);
 }
 
+#date-str {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: couriernewbold;
+}
+
+#client-info {
+  font-size: 15px;
+  font-weight: bold;
+  font-family: couriernewbold;
+}
+
 .car_wrap {
   position: relative;
   bottom: 0;
@@ -87,10 +99,17 @@ body {
   width: 100%;
   height: 100vh;
   z-index: -1;
-  background-image: linear-gradient(to top, #0f0209, #23061d, #330531, #3e024b, #41056a, #520578, #640385, #770092, #9b0089, #b8007e, #ce1173, #e03168);
   perspective: 800px;
   overflow: hidden;
 
+  body.man & {
+    background-image: linear-gradient(to top,
+        #080114, #120324, #1d0436, #240244, #260355, #300362, #3a026f, #45007a, #5a0072, #6a0066, #9f1c7a, #b6316b);
+  }
+
+  body.woman & {
+    background-image: linear-gradient(to top, #0f0209, #23061d, #330531, #3e024b, #41056a, #520578, #640385, #770092, #9b0089, #b8007e, #ce1173, #e03168);
+  }
 
   /* Полосы дороги */
   .road-line {
@@ -117,12 +136,10 @@ body {
 @keyframes driveToHorizon {
   0% {
     transform: translateY(0) scale(1.2);
-    opacity: 1;
   }
 
   100% {
     transform: translateY(-25vh) scale(0.3);
-    opacity: 0.5;
   }
 }
 
@@ -189,12 +206,28 @@ span:nth-child(2) {
 #top {
   width: 100%;
   height: 50%;
-  background: linear-gradient(#0d0221 0%,
-      #45125e 40%,
-      #a22561 80%,
-      #ff3864 100%);
-  box-shadow: 0 0 100px purple, 0 0 200px purple;
 
+  body.man & {
+    #top {
+      width: 100%;
+      height: 50%;
+      background: linear-gradient(180deg,
+          #0f0c29 0%,
+          #302b63 40%,
+          #24243e 80%,
+          #1a1a2e 100%);
+      box-shadow: 0 0 50px #ff00ff, 0 0 100px #00ffff, 0 0 150px #ff00ff;
+    }
+  }
+
+  body.woman & {
+    background: linear-gradient(#0d0221 0%,
+        #45125e 40%,
+        #a22561 80%,
+        #ff3864 100%);
+    box-shadow: 0 0 100px purple,
+      0 0 200px purple;
+  }
 }
 
 .stars {
@@ -210,22 +243,39 @@ span:nth-child(2) {
   height: 40vw;
   margin: 0 auto;
   max-height: 40vh;
-  background: linear-gradient(#ff3864 0%, #f80 100%);
-  box-shadow: inset 0 0 20px #800080, 0 0 120px #800080, 0 35vh 400px #add8e64d;
   border-radius: 50%;
   position: absolute;
   inset: auto 0 55vh 0;
   overflow: hidden;
   z-index: 10;
+
+  body.man & {
+    background: linear-gradient(
+  #6a5acd 0%,    /* Сине-фиолетовый */
+  #a47cc8 100%   /* Холодный розово-фиолетовый */
+);
+box-shadow: inset 0 0 20px #8a6bb8, 0 0 120px #8a6bb8, 0 35vh 400px #c9b8e64d;
+  }
+
+  body.woman & {
+    background: linear-gradient(#ff3864 0%, #f80 100%);
+    box-shadow: inset 0 0 20px #800080, 0 0 120px #800080, 0 35vh 400px #add8e64d;
+  }
 }
 
 .sun {
   height: 0;
   width: 100%;
   position: absolute;
-  inset: 5vh 0 auto 0;
-  transform: translateY(6vh);
-  animation: sunset 8s linear infinite;
+  inset: 3vh 0 auto 0;
+
+  body.man & {
+    animation: sunset-2 8s linear infinite;
+  }
+
+  body.woman & {
+    animation: sunset-1 8s linear infinite;
+  }
 
   @include screen-768 {
     inset: 0 0 auto 0;
@@ -233,7 +283,7 @@ span:nth-child(2) {
   }
 }
 
-@keyframes sunset {
+@keyframes sunset-1 {
 
   0%,
   5% {
@@ -252,6 +302,29 @@ span:nth-child(2) {
   100% {
     height: 4vh;
     background: #e03263;
+    transform: translateY(40vh);
+  }
+}
+
+@keyframes sunset-2 {
+
+  0%,
+  5% {
+    background: #4d6d8d;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  70% {
+    background: #466f9d;
+  }
+
+  100% {
+    height: 4vh;
+    background: #e7eaef4d;
     transform: translateY(40vh);
   }
 }
