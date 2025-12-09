@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить новую открытку</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 15px;
+            background: #007cba;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #005a87;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .json-preview {
+            margin-top: 20px;
+            white-space: pre-wrap;
+            background: #f5f5f5;
+            padding: 10px;
+        }
+
+        #loginForm,
+        #mainForm {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Добавить новую открытку</h1>
+
+    <div id="loginForm">
+        <h2>Вход</h2>
+        <div class="form-group">
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button onclick="login()">Войти</button>
+        <div id="loginMessage"></div>
+    </div>
+
+    <form id="mainForm" style="display: none;">
+        <div class="form-group">
+            <label for="name">Имя клиента:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="sender_rp">Имя отправителя в родительном падеже (кого?):</label>
+            <input type="text" id="sender_rp" name="sender_rp" required>
+        </div>
+
+        <div class="form-group">
+            <label for="sender_ip">Имя отправителя в именительном падеже (кто?):</label>
+            <input type="text" id="sender_ip" name="sender_ip" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Сообщение:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="photo">URL фото:</label>
+            <input type="url" id="photo" name="photo">
+        </div>
+
+        <div class="form-group">
+            <label for="path">Часть пути:</label>
+            <input type="text" id="path" name="path" placeholder="jumble-example" required>
+        </div>
+
+        <div class="form-group">
+            <label for="gender">Пол:</label>
+            <select id="gender" name="gender" required>
+                <option value="">Выберите</option>
+                <option value="man">Мужской</option>
+                <option value="woman">Женский</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="dateStr">Дата (YYYY-MM-DD):</label>
+            <input type="date" id="dateStr" name="dateStr" required>
+        </div>
+
+        <div class="form-group">
+            <label for="template">Шаблон:</label>
+            <select id="template" name="template" required>
+                <option value="">Выберите</option>
+                <option value="retrowave">retrowave</option>
+                <option value="jumble">jumble</option>
+                <option value="terminal">terminal</option>
+                <option value="computer">computer</option>
+            </select>
+        </div>
+
+        <button type="submit">Добавить в new-cards.json</button>
+    </form>
+
+    <div id="messageDiv"></div>
+    <div class="json-preview" id="jsonPreview" style="display:none;"></div>
+
+    <script>
+        let isAuthenticated = false;
+        let authPassword = null; // Будет хранить введённый пароль, но не отправляется на сервер дважды
+
+        function login() {
+            const password = document.getElementById('password').value;
+            if (!password) {
+                document.getElementById('loginMessage').innerHTML = '<p class="error">Введите пароль</p>';
+                return;
+            }
+
+            // Отправляем пароль на сервер для проверки
+            fetch('/api/check-auth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${password}`
+                }
+            })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        authPassword = password; // Сохраняем пароль для последующих запросов
+                        isAuthenticated = true;
+                        document.getElementById('loginForm').style.display = 'none';
+                        document.getElementById('mainForm').style.display = 'block';
+                        document.getElementById('loginMessage').innerHTML = ''; // Очищаем сообщение
+                    } else {
+                        document.getElementById('loginMessage').innerHTML = `<p class="error">${result.error}</p>`;
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    document.getElementById('loginMessage').innerHTML = '<p class="error">Ошибка сети.</p>';
+                });
+        }
+
+        document.getElementById('mainForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            if (!isAuthenticated || !authPassword) {
+                alert('Сначала войдите.');
+                return;
+            }
+
+            const formData = new FormData(this);
+            const card = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/api/add-card', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authPassword}` // Передаём тот же пароль
+                    },
+                    body: JSON.stringify(card)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('messageDiv').innerHTML = `<p class="success">${result.message}</p>`;
+                    this.reset();
+                } else {
+                    document.getElementById('messageDiv').innerHTML = `<p class="error">Ошибка: ${result.error}</p>`;
+                }
+            } catch (err) {
+                document.getElementById('messageDiv').innerHTML = '<p class="error">Ошибка сети.</p>';
+            }
+        });
+
+        // Показываем форму входа при загрузке
+        document.getElementById('loginForm').style.display = 'block';
+    </script>
+</body>
+
+</html>
