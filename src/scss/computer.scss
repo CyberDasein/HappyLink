@@ -1,0 +1,564 @@
+@use "common"as *;
+
+body {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 100vh;
+  overflow: hidden;
+  background-attachment: fixed;
+  transition: background-position 0.2s ease-out;
+
+  &.man {
+    background-color: #0C0C0C;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('../images/computer-man_bg2.png');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      background-repeat: no-repeat;
+      animation: filterBackground 15s ease-in-out infinite alternate;
+      z-index: 10;
+    }
+  }
+}
+
+h1 {
+  font-size: 176px;
+  font-family: Bokor;
+  background: linear-gradient(359.75deg, #E9D7FF 18.15%, #8B53FE 28.5%, #E9D7FF 52.67%, #8B53FE 76.83%, #E9D7FF 87.18%);
+  background-clip: text;
+  color: transparent;
+  position: relative;
+  z-index: 111;
+  /* Делает цвет текста прозрачным, чтобы был виден только фон */
+  -webkit-background-clip: text;
+  /* Для старых версий Safari */
+  -webkit-text-fill-color: transparent;
+  /* Для старых версий Safari */
+  -webkit-text-stroke: 1px white;
+}
+
+.flex {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.computer-monitor {
+  position: absolute;
+  top: 85px;
+  left: 126px;
+  min-width: 355px;
+  font-size: rem(24px);
+  font-weight: 500;
+  font-family: handjet;
+  color: #13D844;
+  border: 2px dashed #13D844;
+  padding: 16px 20px;
+  text-align: left;
+
+  .message {
+    display: inline-block;
+    width: 32px;
+    height: 20px;
+    margin-left: 12px;
+    background: url("../images/computer-message.svg") no-repeat center;
+  }
+
+  &__top {
+    padding: 10px 20px;
+    border: 2px dashed #13D844;
+    margin-bottom: 12px;
+
+    .name {
+      margin-bottom: 10px;
+      font-size: 32px;
+      font-weight: 600;
+    }
+  }
+
+  &__bottom {
+    padding: 16px 20px;
+    border: 2px dashed #13D844;
+  }
+
+  &__btn {
+    width: 100%;
+    margin-top: 21px;
+    padding: 12px 24px;
+    color: #030303;
+    font-weight: 500;
+    background-color: #13D844;
+    outline: 1px solid #030303;
+    outline-offset: -5px;
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+      background-color: #1ffb56;
+    }
+  }
+}
+
+.computer-bg {
+  position: absolute;
+  top: 5%;
+  left: 15%;
+  width: 100%;
+  max-width: 70%;
+  height: rem(40px);
+  background: rgba(104, 122, 112, 0.35);
+  border-radius: 100px;
+
+  &.bg-1 {
+    top: rem(270px);
+  }
+
+  &.bg-2 {
+    top: rem(320px);
+  }
+
+  &.bg-3 {
+    top: rem(370px);
+  }
+
+  &.bg-4 {
+    top: rem(420px);
+  }
+
+  &.bg-5 {
+    top: rem(470px);
+  }
+
+  &.bg-6 {
+    top: rem(520px);
+  }
+
+  &.bg-7 {
+    top: rem(570px);
+  }
+
+  &.bg-8 {
+    top: rem(620px);
+  }
+
+  &.bg-9 {
+    top: rem(670px);
+  }
+
+}
+
+.center-section {
+  position: relative;
+  width: 75vw;
+  margin: 0 auto;
+  padding-top: 40px;
+  text-align: center;
+  overflow: hidden;
+  z-index: 11;
+  height: 100%;
+
+  &::after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: #0C0C0C;
+    z-index: -1;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -110%;
+    left: -50%;
+    width: 300%;
+    height: 300%;
+    background-image: url("../images/noize.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.42;
+    animation: grain 8s steps(10) infinite;
+    z-index: 1;
+  }
+}
+
+.computer-card-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  max-width: max-content;
+  margin: 0 auto;
+  z-index: 100;
+}
+
+.bottom-info {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 70%;
+  color: #FDFEFD;
+  font-family: handjet;
+  font-size: rem(44px);
+  font-weight: 600;
+  bottom: 25%;
+  z-index: 101;
+}
+
+.baloons {
+  position: absolute;
+  width: 100%;
+  height: calc(100% + 20vh);
+  bottom: 0;
+  z-index: 1111;
+
+  @include screen-1024 {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+}
+
+.baloon {
+  position: absolute;
+  width: 70%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  will-change: transform;
+  transform: translateZ(0);
+
+  body.man & {
+    background-image: url("../images/baloon-purple.png");
+  }
+
+  body.woman & {
+    background-image: url("../images/baloon-silver.png");
+  }
+
+  &.baloon-one {
+    width: rem(450px);
+    height: rem(330px);
+    left: 3vw;
+    transform: translateY(-100%);
+    animation: up 5s linear forwards 5.8s;
+  }
+
+  &.baloon-two {
+    width: rem(400px);
+    height: rem(300px);
+    left: 18vw;
+    transform: translateY(-100%);
+    animation: up 5s linear forwards 4.8s;
+  }
+
+  &.baloon-three {
+    width: rem(280px);
+    height: rem(200px);
+    left: 30vw;
+    transform: translateY(-100%);
+    animation: up 5s linear forwards 3.6s;
+  }
+
+  &.baloon-four {
+    width: rem(440px);
+    height: rem(310px);
+    left: 36vw;
+    transform: translateY(-100%);
+    animation: up 5s linear forwards 5.8s;
+  }
+
+  &.baloon-five {
+    width: rem(295px);
+    height: rem(232px);
+    left: 37vw;
+    transform: translateY(-100%);
+    animation: up 5s linear forwards 4.3s;
+  }
+
+  &.baloon-six {
+    width: rem(325px);
+    height: rem(212px);
+    right: 49vw;
+    transform: translateY(-100%);
+    animation: up 5s linear forwards 3.25s;
+  }
+
+  &.baloon-seven {
+    width: rem(330px);
+    height: rem(235px);
+    right: 30vw;
+    transform: translateY(-100%);
+    animation: up 5s linear forwards 4.7s;
+  }
+
+  &.baloon-eight {
+    width: rem(333px);
+    height: rem(295px);
+    right: 23vw;
+    transform: translateY(-100%);
+    animation: up 5s linear forwards 4.85s;
+  }
+
+  &.baloon-nine {
+    width: rem(295px);
+    height: rem(212px);
+    right: 17vw;
+    transform: translateY(-100%);
+    animation: up 5s linear forwards 3.5s;
+  }
+
+  &.baloon-ten {
+    width: rem(485px);
+    height: rem(322px);
+    top: 4vh;
+    right: 5vw;
+    transform: translateY(-100%) rotate(5deg);
+    animation: upTwo 5s linear forwards 6.5s;
+  }
+
+  @include screen-768 {
+    &.baloon-one {
+      width: 275px;
+      height: 190px;
+      left: -27vw;
+    }
+
+    &.baloon-two {
+      width: 250px;
+      height: 175px;
+      left: 0;
+      top: 10vh;
+    }
+
+    &.baloon-three {
+      width: 190px;
+      height: 125px;
+      left: 50vw;
+    }
+
+    &.baloon-four {
+      width: 110px;
+      height: 180px;
+      left: 72vw;
+    }
+
+    &.baloon-five {
+      left: 42vw;
+      width: 207px;
+      height: 151px;
+    }
+
+    &.baloon-six {
+      width: 232px;
+      height: 131px;
+    }
+
+    &.baloon-seven {
+      top: -7vh;
+      right: 33vw;
+      width: 215px;
+      height: 147.5px;
+    }
+
+    &.baloon-eight {
+      right: 11vw;
+      width: 201px;
+      height: 155px;
+    }
+
+    &.baloon-nine {
+      top: -7vh;
+      right: 5vw;
+      width: 197.5px;
+      height: 141px;
+    }
+
+    &.baloon-ten {
+      width: 150px;
+      height: 196px;
+      right: 24vw;
+      animation: up 7s linear forwards 4s;
+    }
+  }
+}
+
+.dialog-layout {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1111;
+
+  .dialog-bg-el {
+    position: absolute;
+  }
+  .dialog-bg-el-1 {
+    width: 332px;
+    height: 332px;
+    left: 0;
+    background: url("../images/computer-man-bg-1.png") no-repeat center;
+  }
+
+  .dialog-bg-el-2 {
+    width: 142px;
+    height: 82px;
+    left: 0;
+    background: url("../images/computer-man-bg-2.png") no-repeat center;
+  }
+
+  .dialog-bg-el-3 {
+    width: 300px;
+    height: 270px;
+    left: 0;
+    background: url("../images/computer-man-bg-3.png") no-repeat center;
+  }
+
+  .dialog-bg-el-4 {
+    width: 200px;
+    height: 200px;
+    left: 0;
+    background: url("../images/computer-man-bg-4.png") no-repeat center;
+  }
+
+  .dialog-bg-el-5 {
+    width: 70px;
+    height: 70px;
+    left: 0;
+    background: url("../images/computer-man-bg-5.png") no-repeat center;
+  }
+}
+
+.dialog {
+  width: 100%;
+  max-width: rem(480px);
+  min-height: 290px;
+  position: absolute;
+  border: rem(2px) solid transparent;
+  box-shadow: rem(-2px) rem(-2px) 0px 0px $white;
+  line-height: 1.2;
+  font-size: rem(24px);
+  font-family: "AlphaSmart3000", sans-serif;
+
+  body.man & {
+    background-color: #E8FFE0;
+    border-color: #74FF67;
+  }
+
+  body.woman & {
+    background-color: $light-pink;
+    border-color: $pink;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    max-height: 400px;
+    max-width: rem(400px);
+
+    @include screen-768() {
+      max-height: 350px;
+      max-width: 100%;
+    }
+  }
+
+  &__top {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: rem(8px);
+    color: $white;
+
+    body.man & {
+      background-color: #40DD11;
+    }
+
+    body.woman & {
+      background-color: $dark-pink;
+    }
+  }
+
+  &__text {
+    padding: rem(20px);
+
+    body.man & {
+      background-color: #E8FFE0;
+    }
+
+    body.woman & {
+      background-color: $light-pink;
+    }
+  }
+
+  &__close {
+    position: relative;
+    padding: rem(4px);
+    width: rem(32px);
+    height: rem(32px);
+    border: rem(2px) solid transparent;
+    cursor: pointer;
+
+    body.man & {
+      background: url("../images/green-heart.svg") no-repeat center;
+      background-color: #2DC500;
+      border-color: #85FF67;
+      box-shadow: rem(2px) rem(2px) 0px 0px #067300,
+        rem(-2px) rem(-2px) 0px 0px $white;
+    }
+
+    body.woman & {
+      background: url("../images/pixel-heart.png") no-repeat center;
+      border-color: $pink;
+      background-color: $light-purple;
+      box-shadow: rem(2px) rem(2px) 0px 0px $dark-purple,
+        rem(-2px) rem(-2px) 0px 0px $light-pink;
+    }
+  }
+
+  &--right {
+    top: 50vh;
+    right: 37vw;
+    z-index: 100;
+
+    .dialog__text {
+      overflow-y: auto;
+      max-height: rem(226px);
+    }
+
+    @include screen-1024 {
+      right: 2vw;
+    }
+
+    @include screen-768 {
+      margin: rem(40px) auto;
+      transform: rotate(0);
+    }
+  }
+
+  @include screen-768 {
+    max-width: 90%;
+    position: initial;
+    animation: none;
+  }
+}

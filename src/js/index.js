@@ -1,4 +1,5 @@
 const templateInitMap = {
+  computer: () => import('./templates/computer.js'),
   jumble: () => import('./templates/jumble.js'),
   retrowave: () => import('./templates/retrowave.js'),
   terminal: () => import('./templates/terminal.js')

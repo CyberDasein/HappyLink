@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="С днём рождения, <%= cardDataJson.name %>! 🎉 Только для тебя 🎂" />
+    <meta property="og:description" content="Открытка, наполненная светом и теплом. С днём рождения, счастья тебе!" />
+    <meta property="og:url" content="/" />
+    <title>С днём рождения, <%= cardDataJson.name %>!</title>
+</head>
+
+<body class="<%= cardDataJson.gender %>">
+
+    <div class="center-section">
+        <h1>Happy birthday!</h1>
+        <div class="computer-card-container">
+            <img class="computer-img" src="<%= images.computer %>" alt="computer">
+            <div class="computer-monitor">
+                <div class="computer-monitor__top">
+                    <div class="name">Константин</div>
+                    <div class="info">28 лет: 11 месяцев: 29 дней</div>
+                </div>
+                <div class="computer-monitor__bottom">
+                    <div class="flex align-center justify-center"><span>1 новое сообщение</span> <span
+                            class="message"></span> </div>
+                    <button class="computer-monitor__btn">Открыть</button>
+                </div>
+            </div>
+        </div>
+        <span class="computer-bg bg-1"></span>
+        <span class="computer-bg bg-2"></span>
+        <span class="computer-bg bg-3"></span>
+        <span class="computer-bg bg-4"></span>
+        <span class="computer-bg bg-5"></span>
+        <span class="computer-bg bg-6"></span>
+        <span class="computer-bg bg-7"></span>
+        <span class="computer-bg bg-8"></span>
+        <span class="computer-bg bg-9"></span>
+
+        <div class="bottom-info">
+            <div class="date">
+                29/12/1996
+            </div>
+            <div class="years">
+                28 лет
+            </div>
+        </div>
+
+        <div class="baloons">
+            <div class="baloon baloon-one"></div>
+            <div class="baloon baloon-two"></div>
+            <div class="baloon baloon-three"></div>
+            <div class="baloon baloon-four"></div>
+            <div class="baloon baloon-five"></div>
+            <div class="baloon baloon-six"></div>
+            <div class="baloon baloon-seven"></div>
+            <div class="baloon baloon-eight"></div>
+            <div class="baloon baloon-nine"></div>
+            <div class="baloon baloon-ten"></div>
+        </div>
+
+    </div>
+
+    <div class="dialog-layout">
+        <div class="dialog rotate-floating dialog--right">
+            <div class="dialog__top">
+                Сообщение_от_мужа
+                <button class="dialog__close heartBtn"></button>
+            </div>
+            <div class="dialog__text">
+                <p id="js-message">
+                    <%= cardDataJson.message %>
+                </p>
+            </div>
+        </div>
+
+        <div class="dialog-bg-el dialog-bg-el-1"></div>
+        <div class="dialog-bg-el dialog-bg-el-2"></div>
+        <div class="dialog-bg-el dialog-bg-el-3"></div>
+        <div class="dialog-bg-el dialog-bg-el-4"></div>
+        <div class="dialog-bg-el dialog-bg-el-5"></div>
+    </div>
+
+    <script>
+        window.CARD_DATA_PLACEHOLDER = {
+            name: "<%- cardDataJson.name %>",
+            message: "<%- cardDataJson.message %>",
+            photo: "<%- cardDataJson.photo %>",
+            dateStr: "<%- cardDataJson.dateStr %>",
+            path: "<%- cardDataJson.path %>",
+            template: "<%- cardDataJson.template %>",
+            gender: "<%- cardDataJson.gender %>",
+            generatedPath: "<%- cardDataJson.generatedPath %>"
+        };
+    </script>
+</body>
+
+</html>
