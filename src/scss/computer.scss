@@ -8,32 +8,45 @@ body {
   overflow: hidden;
   background-attachment: fixed;
   transition: background-position 0.2s ease-out;
+  background-color: #0C0C0C;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    background-repeat: no-repeat;
+    animation: filterBackground 15s ease-in-out infinite alternate;
+    z-index: 10;
+
+
+  }
 
   &.man {
-    background-color: #0C0C0C;
+    background-image: url('../images/computer-man_bg2.png');
 
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url('../images/computer-man_bg2.png');
-      background-size: cover;
-      background-position: center;
-      height: 100vh;
-      background-repeat: no-repeat;
-      animation: filterBackground 15s ease-in-out infinite alternate;
-      z-index: 10;
+    @include screen-768 {
+      background-image: url('../images/computer-man-bg-mobile.png');
+    }
+  }
+
+  &.woman {
+    background-image: url('../images/computer-woman_bg2.png');
+
+    @include screen-768 {
+      background-image: url('../images/computer-woman-bg-mobile.png');
     }
   }
 }
 
 h1 {
-  font-size: 176px;
+  font-size: rem(176px);
   font-family: Bokor;
-  background: linear-gradient(359.75deg, #E9D7FF 18.15%, #8B53FE 28.5%, #E9D7FF 52.67%, #8B53FE 76.83%, #E9D7FF 87.18%);
   background-clip: text;
   color: transparent;
   position: relative;
@@ -43,7 +56,32 @@ h1 {
   /* Для старых версий Safari */
   -webkit-text-fill-color: transparent;
   /* Для старых версий Safari */
-  -webkit-text-stroke: 1px white;
+
+  body.man & {
+    background: linear-gradient(359.75deg, #E9D7FF 18.15%, #8B53FE 28.5%, #E9D7FF 52.67%, #8B53FE 76.83%, #E9D7FF 87.18%);
+    background-clip: text;
+    -webkit-text-stroke: 1px white;
+  }
+
+  body.woman & {
+    background: linear-gradient(352.44deg, #FFD7FA 22%, #FF06DE 52.63%, #FFD7FA 83.25%);
+    background-clip: text;
+    -webkit-text-stroke: 1px rgb(0, 0, 0);
+  }
+
+  &.show-xs {
+    margin-top: 20px;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+
+  @include screen-1024 {
+    font-size: 90px;
+  }
+
+  @include screen-568 {
+    font-size: 80px;
+  }
 }
 
 .flex {
@@ -63,13 +101,22 @@ h1 {
   top: 85px;
   left: 126px;
   min-width: 355px;
-  font-size: rem(24px);
+  font-size: 24px;
   font-weight: 500;
   font-family: handjet;
-  color: #13D844;
-  border: 2px dashed #13D844;
+
   padding: 16px 20px;
   text-align: left;
+
+  body.man & {
+    color: #13D844;
+    border: 2px dashed #13D844;
+  }
+
+  body.woman & {
+    color: #F74CC3;
+    border: 2px dashed #F74CC3;
+  }
 
   .message {
     display: inline-block;
@@ -77,23 +124,64 @@ h1 {
     height: 20px;
     margin-left: 12px;
     background: url("../images/computer-message.svg") no-repeat center;
+    background-size: contain;
+
+    body.woman & {
+      background: url("../images/computer-message-woman.svg") no-repeat center;
+      background-size: contain;
+    }
+
+    @include screen-568 {
+      width: 19px;
+      height: 12px;
+    }
   }
 
   &__top {
     padding: 10px 20px;
-    border: 2px dashed #13D844;
     margin-bottom: 12px;
+
+    body.man & {
+      border: 2px dashed #13D844;
+    }
+
+    body.woman & {
+      border: 2px dashed #F74CC3;
+    }
 
     .name {
       margin-bottom: 10px;
       font-size: 32px;
       font-weight: 600;
+
+      @include screen-568 {
+        margin-bottom: 4px;
+        font-size: 16px;
+      }
+    }
+
+    @include screen-568 {
+      margin-bottom: 4px;
+      padding: 8px;
     }
   }
 
   &__bottom {
     padding: 16px 20px;
-    border: 2px dashed #13D844;
+
+    body.man & {
+      border: 2px dashed #13D844;
+    }
+
+    body.woman & {
+      border: 2px dashed #F74CC3;
+    }
+
+    @include screen-568 {
+      padding: 8px;
+      padding-top: 12px;
+      padding-bottom: 10px;
+    }
   }
 
   &__btn {
@@ -102,15 +190,46 @@ h1 {
     padding: 12px 24px;
     color: #030303;
     font-weight: 500;
-    background-color: #13D844;
     outline: 1px solid #030303;
     outline-offset: -5px;
     cursor: pointer;
 
-    &:hover,
-    &:active {
-      background-color: #1ffb56;
+    body.man & {
+      background-color: #13D844;
+
+      &:hover,
+      &:active {
+        background-color: #1ffb56;
+      }
     }
+
+    body.woman & {
+      background-color: #F74CC3;
+
+      &:hover,
+      &:active {
+        background-color: #f768cc;
+      }
+    }
+
+    @include screen-568 {
+      margin-top: 12px;
+      font-size: 15px;
+    }
+  }
+
+  @include screen-768 {
+    top: 77px;
+    left: 113px;
+  }
+
+  @include screen-568 {
+    min-width: 200px;
+    padding: 0;
+    top: 42px;
+    left: 62px;
+    border: none;
+    font-size: 14px;
   }
 }
 
@@ -160,6 +279,15 @@ h1 {
     top: rem(670px);
   }
 
+  @include screen-1280 {
+    margin-top: 50px;
+  }
+
+  @include screen-568 {
+    margin-top: -150px;
+    left: 8%;
+    max-width: 85%;
+  }
 }
 
 .center-section {
@@ -191,12 +319,27 @@ h1 {
     left: -50%;
     width: 300%;
     height: 300%;
-    background-image: url("../images/noize.jpg");
+    background-image: url("../images/noize.svg");
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0.42;
     animation: grain 8s steps(10) infinite;
     z-index: 1;
+
+    body.man & {
+      background-color: #090b0d;
+    }
+
+    body.woman & {
+      background-color: #381770;
+    }
+  }
+
+  @include screen-568 {
+    height: max-content;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 }
 
@@ -207,6 +350,12 @@ h1 {
   max-width: max-content;
   margin: 0 auto;
   z-index: 100;
+
+  .computer-img {
+    @include screen-568 {
+      width: 320px;
+    }
+  }
 }
 
 .bottom-info {
@@ -222,6 +371,18 @@ h1 {
   font-weight: 600;
   bottom: 25%;
   z-index: 101;
+
+
+  @include screen-568 {
+    flex-direction: column;
+    position: fixed;
+    max-width: 100%;
+    bottom: 40px;
+
+    body.woman & {
+      color: #030303;
+    }
+  }
 }
 
 .baloons {
@@ -229,7 +390,7 @@ h1 {
   width: 100%;
   height: calc(100% + 20vh);
   bottom: 0;
-  z-index: 1111;
+  z-index: 9999;
 
   @include screen-1024 {
     max-width: 100vw;
@@ -402,58 +563,192 @@ h1 {
   }
 }
 
+@keyframes glow-green {
+  from {
+    box-shadow: 0 0 5px #13D844, 0 0 10px #13D844;
+  }
+
+  to {
+    box-shadow: 0 0 10px #13D844, 0 0 15px #13D844, 0 0 25px #13D844;
+  }
+}
+
+@keyframes glow-pink {
+  from {
+    box-shadow: 0 0 5px #F74CC3, 0 0 10px #F74CC3;
+  }
+
+  to {
+    box-shadow: 0 0 10px #F74CC3, 0 0 15px #F74CC3, 0 0 25px #F74CC3;
+  }
+}
+
+.js-open-dialog.animated {
+  body.woman & {
+    animation: glow-pink 1.8s infinite alternate;
+  }
+
+  body.man & {
+    animation: glow-green 1.8s infinite alternate;
+  }
+}
+
 .dialog-layout {
   position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
   z-index: 1111;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.2s opacity ease-in;
+
+  &--active {
+    opacity: 1;
+    visibility: visible;
+  }
 
   .dialog-bg-el {
     position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
   }
+
   .dialog-bg-el-1 {
-    width: 332px;
-    height: 332px;
-    left: 0;
-    background: url("../images/computer-man-bg-1.png") no-repeat center;
+    width: rem(332px);
+    height: rem(332px);
+    left: 15%;
+    top: 20%;
+
+    body.man & {
+      background-image: url("../images/computer-man-bg-1.png");
+    }
+
+    body.woman & {
+      background-image: url("../images/computer-woman-bg-1.png");
+    }
+
+    background-size: contain;
+
+    @include screen-768 {
+      width: 150px;
+      height: 150px;
+      top: 16%;
+      left: 0;
+    }
   }
 
   .dialog-bg-el-2 {
-    width: 142px;
-    height: 82px;
-    left: 0;
-    background: url("../images/computer-man-bg-2.png") no-repeat center;
+    top: 28%;
+    right: 17%;
+
+    body.man & {
+      width: rem(142px);
+      height: rem(82px);
+      background-image: url("../images/computer-man-bg-2.png");
+    }
+
+    body.woman & {
+      width: rem(115px);
+      height: rem(115px);
+      background-image: url("../images/computer-woman-bg-3.png");
+    }
+
+    background-size: contain;
+
+    @include screen-768 {
+      top: 22%;
+      right: 5%;
+    }
   }
 
   .dialog-bg-el-3 {
-    width: 300px;
-    height: 270px;
-    left: 0;
-    background: url("../images/computer-man-bg-3.png") no-repeat center;
+    top: 45%;
+    right: 13%;
+
+    body.man & {
+      width: rem(300px);
+      height: rem(270px);
+      background-image: url("../images/computer-man-bg-3.png");
+    }
+
+    body.woman & {
+      width: rem(250px);
+      height: rem(260px);
+      background-image: url("../images/computer-woman-bg-4.png");
+    }
+
+    background-size: contain;
+
+    @include screen-768 {
+      width: 180px;
+      height: 140px;
+      top: 61%;
+      right: 0;
+
+      body.woman & {
+        width: 120px;
+        height: 125px;
+      }
+    }
   }
 
   .dialog-bg-el-4 {
-    width: 200px;
-    height: 200px;
-    left: 0;
-    background: url("../images/computer-man-bg-4.png") no-repeat center;
+    left: 18%;
+    top: 52%;
+
+    body.man & {
+      width: rem(200px);
+      height: rem(200px);
+      background-image: url("../images/computer-man-bg-4.png");
+    }
+
+    body.woman & {
+      width: rem(140px);
+      height: rem(140px);
+      background-image: url("../images/computer-woman-bg-2.png");
+    }
+
+    background-size: contain;
+
+    @include screen-768 {
+      width: 100px;
+      height: 100px;
+      left: 1%;
+      top: 60%;
+    }
   }
 
   .dialog-bg-el-5 {
-    width: 70px;
-    height: 70px;
-    left: 0;
-    background: url("../images/computer-man-bg-5.png") no-repeat center;
+    width: rem(70px);
+    height: rem(70px);
+    top: 22%;
+    right: 30%;
+
+    body.man & {
+      background-image: url("../images/computer-man-bg-5.png");
+    }
+
+    body.woman & {
+      background-image: url("../images/computer-woman-bg-5.png");
+    }
+
+    background-size: contain;
+
+    @include screen-768 {
+      top: 14%;
+    }
   }
 }
 
 .dialog {
   width: 100%;
-  max-width: rem(480px);
-  min-height: 290px;
+  max-width: rem(664px);
+  min-height: 212px;
   position: absolute;
   border: rem(2px) solid transparent;
   box-shadow: rem(-2px) rem(-2px) 0px 0px $white;
@@ -511,6 +806,30 @@ h1 {
     }
   }
 
+  &__cross {
+    position: relative;
+    padding: rem(4px);
+    width: rem(32px);
+    height: rem(32px);
+    border: 2px solid transparent;
+    cursor: pointer;
+    background: url("../images/pixel-cross.svg") no-repeat center;
+
+    body.man & {
+      background-color: #2DC500;
+      border-color: #85FF67;
+      box-shadow: rem(2px) rem(2px) 0px 0px #067300,
+        rem(-2px) rem(-2px) 0px 0px $white;
+    }
+
+    body.woman & {
+      border-color: $pink;
+      background-color: $light-purple;
+      box-shadow: rem(2px) rem(2px) 0px 0px $dark-purple,
+        rem(-2px) rem(-2px) 0px 0px $light-pink;
+    }
+  }
+
   &__close {
     position: relative;
     padding: rem(4px);
@@ -537,28 +856,26 @@ h1 {
   }
 
   &--right {
-    top: 50vh;
-    right: 37vw;
+    top: 38vh;
+    right: 30vw;
     z-index: 100;
 
     .dialog__text {
       overflow-y: auto;
-      max-height: rem(226px);
-    }
-
-    @include screen-1024 {
-      right: 2vw;
+      max-height: 164px;
     }
 
     @include screen-768 {
       margin: rem(40px) auto;
       transform: rotate(0);
+      right: 14vw;
+      top: 30vh;
+      animation: none;
     }
-  }
 
-  @include screen-768 {
-    max-width: 90%;
-    position: initial;
-    animation: none;
+    @include screen-568 {
+      left: 16px;
+      max-width: calc(100% - 32px);
+    }
   }
 }

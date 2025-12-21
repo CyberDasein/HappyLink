@@ -11,20 +11,25 @@
 </head>
 
 <body class="<%= cardDataJson.gender %>">
-
+    <h1 class="show-xs">Happy <br> birthday!</h1>
     <div class="center-section">
-        <h1>Happy birthday!</h1>
+        <h1 class="show-deskop">Happy birthday!</h1>
         <div class="computer-card-container">
-            <img class="computer-img" src="<%= images.computer %>" alt="computer">
+            <picture>
+                <source media="(max-width: 576px)" srcset="<%= images.computerMobile %>">
+                <img class="computer-img" src="<%= images.computer %>" alt="computer">
+            </picture>
             <div class="computer-monitor">
                 <div class="computer-monitor__top">
-                    <div class="name">Константин</div>
-                    <div class="info">28 лет: 11 месяцев: 29 дней</div>
+                    <div class="name">
+                        <%= cardDataJson.name %>
+                    </div>
+                    <div class="info"></div>
                 </div>
                 <div class="computer-monitor__bottom">
                     <div class="flex align-center justify-center"><span>1 новое сообщение</span> <span
                             class="message"></span> </div>
-                    <button class="computer-monitor__btn">Открыть</button>
+                    <button class="computer-monitor__btn js-open-dialog">Открыть</button>
                 </div>
             </div>
         </div>
@@ -39,25 +44,8 @@
         <span class="computer-bg bg-9"></span>
 
         <div class="bottom-info">
-            <div class="date">
-                29/12/1996
-            </div>
-            <div class="years">
-                28 лет
-            </div>
-        </div>
-
-        <div class="baloons">
-            <div class="baloon baloon-one"></div>
-            <div class="baloon baloon-two"></div>
-            <div class="baloon baloon-three"></div>
-            <div class="baloon baloon-four"></div>
-            <div class="baloon baloon-five"></div>
-            <div class="baloon baloon-six"></div>
-            <div class="baloon baloon-seven"></div>
-            <div class="baloon baloon-eight"></div>
-            <div class="baloon baloon-nine"></div>
-            <div class="baloon baloon-ten"></div>
+            <div class="date"></div>
+            <div class="years"></div>
         </div>
 
     </div>
@@ -65,8 +53,11 @@
     <div class="dialog-layout">
         <div class="dialog rotate-floating dialog--right">
             <div class="dialog__top">
-                Сообщение_от_мужа
-                <button class="dialog__close heartBtn"></button>
+                <span>Сообщение_от_<%= cardDataJson.sender_rp %></span>
+                <div class="wrap">
+                    <button class="dialog__close heartBtn"></button>
+                    <button class="dialog__cross js-close-dialog"></button>
+                </div>
             </div>
             <div class="dialog__text">
                 <p id="js-message">
@@ -82,6 +73,18 @@
         <div class="dialog-bg-el dialog-bg-el-5"></div>
     </div>
 
+    <div class="baloons">
+        <div class="baloon baloon-one"></div>
+        <div class="baloon baloon-two"></div>
+        <div class="baloon baloon-three"></div>
+        <div class="baloon baloon-four"></div>
+        <div class="baloon baloon-five"></div>
+        <div class="baloon baloon-six"></div>
+        <div class="baloon baloon-seven"></div>
+        <div class="baloon baloon-eight"></div>
+        <div class="baloon baloon-nine"></div>
+        <div class="baloon baloon-ten"></div>
+    </div>
     <script>
         window.CARD_DATA_PLACEHOLDER = {
             name: "<%- cardDataJson.name %>",

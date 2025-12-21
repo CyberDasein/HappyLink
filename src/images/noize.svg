@@ -1,0 +1,22 @@
+<svg 
+  viewBox="0 0 2000 2000"
+  xmlns='http://www.w3.org/2000/svg'>
+
+  <filter id='noiseFilter'>
+    <feTurbulence 
+      type='fractalNoise' 
+      baseFrequency='0.9' 
+      numOctaves='3' 
+      stitchTiles='stitch' />
+    <feComponentTransfer>
+      <feFuncA type='linear' slope='1'/> <!-- Регулирует прозрачность шума -->
+    </feComponentTransfer>
+  </filter>
+
+  <!-- Прозрачный прямоугольник с фильтром -->
+  <rect
+    width='100%' 
+    height='100%' 
+    filter='url(#noiseFilter)'
+    opacity="0.6" />
+</svg>

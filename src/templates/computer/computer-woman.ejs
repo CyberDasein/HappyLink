@@ -11,69 +11,81 @@
 </head>
 
 <body class="<%= cardDataJson.gender %>">
-  
+    <h1 class="show-xs">Happy <br> birthday!</h1>
     <div class="center-section">
-        <div class="terminal-card-container">
-            <img class="terminal-img" src="<%= images.terminal %>" alt="termainal">
-
-            <div class="crawl-line">
-                <div class="crawl-line__text">Поздравляем с днем Рождения!</div>
-            </div>
-            <div class="terminal-list">
-                <div class="terminal-list__wrap">
-                    <div class="terminal-list__top">
-                        <p>ОТЧЁТ О ПОЗДРАВЛЕНИИ</p>
-                        <p>НОМЕР: #BIRTHDAY_x</p>
-                        <p>ДАТА: xx АПРЕЛЯ xxxx</p>
-                        <p>КОЛИЧЕСТВО ЛЕТ: xx</p>
+        <h1 class="show-deskop">Happy birthday!</h1>
+        <div class="computer-card-container">
+            <picture>
+                <source media="(max-width: 576px)" srcset="<%= images.computerMobile %>">
+                <img class="computer-img" src="<%= images.computer %>" alt="computer">
+            </picture>
+            <div class="computer-monitor">
+                <div class="computer-monitor__top">
+                    <div class="name">
+                        <%= cardDataJson.name %>
                     </div>
-                    <div class="terminal-list__text">
-                        <div class="terminal-list__line">
-                            <span>Позиция</span><span>Количество</span> 
-                        </div>
-                        <div class="line"></div>
-                         <div class="terminal-list__line">
-                            <span>СМЕХ</span><span>∞</span> 
-                        </div>
-                         <div class="terminal-list__line">
-                            <span>СОЛНЦЕ</span><span>100%</span> 
-                        </div>
-                         <div class="terminal-list__line">
-                            <span>УСПЕХ</span><span>100%</span> 
-                        </div>
-                         <div class="terminal-list__line">
-                            <span>ПОЗИТИВ</span><span>365 дней/год</span> 
-                        </div>
-                         <div class="terminal-list__line">
-                            <span>ЛЮБОВЬ</span><span>24/7</span> 
-                        </div>
-                         <div class="terminal-list__line">
-                            <span>СЕКРЕТЫ УДАЧИ</span><span>1 шт.</span> 
-                        </div>
-                         <div class="terminal-list__line">
-                            <span>ДРУЖЕСКИЕ ПОДДЕРЖКИ</span><span>999+</span> 
-                        </div>
-                        <div class="line"></div>
-                         <div class="terminal-list__line">
-                            <span>ИТОГО:</span><span>БЕЗГРАНИЧНО</span> 
-                        </div>
-                         <div class="terminal-list__line">
-                            <span>ОПЛАЧЕНО:</span><span>ПОЛНОСТЬЮ</span> 
-                        </div>
-                         <div class="terminal-list__line">
-                            <span>ДРУЖЕСКИЕ ПОДДЕРЖКИ</span><span>999+</span> 
-                        </div>
-                         <div class="terminal-list__line">
-                            <span>ИМЕННИННИК: &nbsp; <%- cardDataJson.name %></span>
-                        </div>
-                         <div class="terminal-list__line">
-                            <span>ПОЗДРАВИТЕЛЬ: &nbsp; <%- cardDataJson.sender_ip %></span>
-                        </div>
-                    </div>
+                    <div class="info"></div>
+                </div>
+                <div class="computer-monitor__bottom">
+                    <div class="flex align-center justify-center"><span>1 новое сообщение</span> <span
+                            class="message"></span> </div>
+                    <button class="computer-monitor__btn js-open-dialog">Открыть</button>
                 </div>
             </div>
-        </div>        
+        </div>
+        <span class="computer-bg bg-1"></span>
+        <span class="computer-bg bg-2"></span>
+        <span class="computer-bg bg-3"></span>
+        <span class="computer-bg bg-4"></span>
+        <span class="computer-bg bg-5"></span>
+        <span class="computer-bg bg-6"></span>
+        <span class="computer-bg bg-7"></span>
+        <span class="computer-bg bg-8"></span>
+        <span class="computer-bg bg-9"></span>
+
+        <div class="bottom-info">
+            <div class="date"></div>
+            <div class="years"></div>
+        </div>
+
     </div>
+
+    <div class="dialog-layout">
+        <div class="dialog rotate-floating dialog--right">
+            <div class="dialog__top">
+                <span>Сообщение_от_<%= cardDataJson.sender_rp %></span>
+                <div class="wrap">
+                    <button class="dialog__close heartBtn"></button>
+                    <button class="dialog__cross js-close-dialog"></button>
+                </div>
+            </div>
+            <div class="dialog__text">
+                <p id="js-message">
+                    <%= cardDataJson.message %>
+                </p>
+            </div>
+        </div>
+
+        <div class="dialog-bg-el dialog-bg-el-1"></div>
+        <div class="dialog-bg-el dialog-bg-el-2"></div>
+        <div class="dialog-bg-el dialog-bg-el-3"></div>
+        <div class="dialog-bg-el dialog-bg-el-4"></div>
+        <div class="dialog-bg-el dialog-bg-el-5"></div>
+    </div>
+
+    <div class="baloons">
+        <div class="baloon baloon-one"></div>
+        <div class="baloon baloon-two"></div>
+        <div class="baloon baloon-three"></div>
+        <div class="baloon baloon-four"></div>
+        <div class="baloon baloon-five"></div>
+        <div class="baloon baloon-six"></div>
+        <div class="baloon baloon-seven"></div>
+        <div class="baloon baloon-eight"></div>
+        <div class="baloon baloon-nine"></div>
+        <div class="baloon baloon-ten"></div>
+    </div>
+
     <script>
         window.CARD_DATA_PLACEHOLDER = {
             name: "<%- cardDataJson.name %>",

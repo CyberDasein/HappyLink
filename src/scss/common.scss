@@ -150,3 +150,16 @@ html {
     font-size: 12px;
   }
 }
+
+.show-xs {
+  display: none;
+  @include screen-568 {
+    display: block;
+  }
+}
+.show-deskop {
+  display: block;
+  @include screen-568 {
+    display: none;
+  }
+}
