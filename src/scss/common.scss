@@ -27,6 +27,7 @@ $blue: #0682FF;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "handjet";
   src: url("../fonts/handjet-regular.ttf") format("truetype");
@@ -34,6 +35,7 @@ $blue: #0682FF;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "couriernewbold";
   src: url("../fonts/couriernewbold.ttf") format("truetype");
@@ -41,6 +43,7 @@ $blue: #0682FF;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "Rosencrantz";
   src: url("../fonts/Rosencrantz.ttf") format("truetype");
@@ -48,6 +51,7 @@ $blue: #0682FF;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "TeletactileRus";
   src: url("../fonts/TeletactileRus.ttf") format("truetype");
@@ -55,6 +59,7 @@ $blue: #0682FF;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "AlphaSmart3000";
   src: url("../fonts/AlphaSmart3000.ttf") format("truetype");
@@ -62,6 +67,7 @@ $blue: #0682FF;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "Moscow2024";
   src: url("../fonts/MOSCOW2024.otf") format("truetype");
@@ -69,6 +75,7 @@ $blue: #0682FF;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "PrincessDiana";
   src: url("../fonts/Princess-Diana.ttf") format("truetype");
@@ -76,6 +83,7 @@ $blue: #0682FF;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "DigitalNumbers";
   src: url("../fonts/DigitalNumbers-Regular.ttf") format("truetype");
@@ -83,6 +91,7 @@ $blue: #0682FF;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "ClassicaOne";
   src: url("../fonts/ClassicaOne.ttf") format("truetype");
@@ -121,6 +130,7 @@ $blue: #0682FF;
     @content;
   }
 }
+
 @mixin screen-568 {
   @media screen and (max-width: 568px) {
     @content;
@@ -153,13 +163,42 @@ html {
 
 .show-xs {
   display: none;
+
   @include screen-568 {
     display: block;
   }
 }
+
 .show-deskop {
   display: block;
+
   @include screen-568 {
     display: none;
   }
+}
+
+.dialog__text::-webkit-scrollbar {
+  width: 12px;
+  /* Ширина вертикального скроллбара */
+  height: 12px;
+  /* Высота горизонтального скроллбара */
+}
+
+.dialog__text::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* Цвет фона дорожки */
+  border-radius: 10px;
+  /* Скругление */
+}
+
+.dialog__text::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  /* Цвет ползунка */
+  border-radius: 10px;
+  /* Скругление ползунка */
+}
+
+.dialog__text::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+  /* Цвет ползунка при наведении */
 }

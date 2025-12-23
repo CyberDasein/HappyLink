@@ -147,7 +147,7 @@ img {
 .dialog {
   width: 100%;
   max-width: rem(480px);
-  min-height: 290px;
+  min-height: rem(290px);
   position: absolute;
   border: rem(2px) solid transparent;
   box-shadow: rem(-2px) rem(-2px) 0px 0px $white;
@@ -172,7 +172,8 @@ img {
     max-height: 400px;
     max-width: rem(400px);
 
-    @include screen-768() {
+    @include screen-768 {
+      object-fit: contain;
       max-height: 350px;
       max-width: 100%;
     }
@@ -233,7 +234,7 @@ img {
 
   &--left {
     top: 35vh;
-    left: 10vh;
+    left: 8vw;
     max-width: max-content;
 
     @include screen-1024 {
@@ -376,7 +377,7 @@ img {
   width: 100%;
   height: calc(100% + 20vh);
   bottom: 0;
-  z-index: 0;
+  z-index: 9999;
 
   @include screen-1024 {
     max-width: 100vw;
