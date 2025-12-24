@@ -1,4 +1,4 @@
-@use "common" as *;
+@use "common"as *;
 
 body {
   background-repeat: no-repeat;
@@ -55,6 +55,10 @@ body {
   max-width: max-content;
   margin: 0 auto;
   padding-top: 40px;
+
+  @include screen-568 {
+    padding-top: 25px;
+  }
 }
 
 .terminal-card-container {
@@ -123,6 +127,7 @@ body {
     body.man & {
       background: linear-gradient(180deg, #494949 0%, #9EA4B7 10%, #D0D5E5 20%, #FFFFFF 30%, #FFFFFF 50%, #FFFFFF 70%, #D0D5E5 80%, #9EA4B7 90%, #494949 100%);
     }
+
     body.woman & {
       background: linear-gradient(180deg, #7C5E7C 0%, #E0CBE0 10%, #EBDEEB 20%, #FFFFFF 30%, #FFFFFF 50%, #FFFFFF 70%, #EBDEEB 80%, #E0CBE0 90%, #7C5E7C 100%);
     }

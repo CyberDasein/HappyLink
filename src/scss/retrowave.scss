@@ -49,7 +49,12 @@ body {
 
     @include screen-768 {
       margin-top: 0;
+      animation: none;
     }
+  }
+
+  @include screen-768 {
+    bottom: 7%;
   }
 }
 
@@ -209,8 +214,6 @@ span:nth-child(2) {
 
   body.man & {
     #top {
-      width: 100%;
-      height: 50%;
       background: linear-gradient(180deg,
           #0f0c29 0%,
           #302b63 40%,
@@ -227,6 +230,10 @@ span:nth-child(2) {
         #ff3864 100%);
     box-shadow: 0 0 100px purple,
       0 0 200px purple;
+  }
+
+  @include screen-568 {
+    height: calc(50% - 30px);
   }
 }
 
@@ -250,11 +257,12 @@ span:nth-child(2) {
   z-index: 10;
 
   body.man & {
-    background: linear-gradient(
-  #6a5acd 0%,    /* Сине-фиолетовый */
-  #a47cc8 100%   /* Холодный розово-фиолетовый */
-);
-box-shadow: inset 0 0 20px #8a6bb8, 0 0 120px #8a6bb8, 0 35vh 400px #c9b8e64d;
+    background: linear-gradient(#6a5acd 0%,
+        /* Сине-фиолетовый */
+        #a47cc8 100%
+        /* Холодный розово-фиолетовый */
+      );
+    box-shadow: inset 0 0 20px #8a6bb8, 0 0 120px #8a6bb8, 0 35vh 400px #c9b8e64d;
   }
 
   body.woman & {

@@ -111,11 +111,19 @@ h1 {
   body.man & {
     color: #13D844;
     border: 2px dashed #13D844;
+
+    @include screen-568 {
+      border-width: 1px;
+    }
   }
 
   body.woman & {
     color: #F74CC3;
     border: 2px dashed #F74CC3;
+
+    @include screen-568 {
+      border-width: 1px;
+    }
   }
 
   .message {
@@ -143,10 +151,18 @@ h1 {
 
     body.man & {
       border: 2px dashed #13D844;
+
+      @include screen-568 {
+        border-width: 1px;
+      }
     }
 
     body.woman & {
       border: 2px dashed #F74CC3;
+
+      @include screen-568 {
+        border-width: 1px;
+      }
     }
 
     .name {
@@ -171,10 +187,18 @@ h1 {
 
     body.man & {
       border: 2px dashed #13D844;
+
+      @include screen-568 {
+        border-width: 1px;
+      }
     }
 
     body.woman & {
       border: 2px dashed #F74CC3;
+
+      @include screen-568 {
+        border-width: 1px;
+      }
     }
 
     @include screen-568 {
@@ -354,6 +378,7 @@ h1 {
   .computer-img {
     @include screen-568 {
       width: 320px;
+      opacity: 0.9;
     }
   }
 }
@@ -378,9 +403,11 @@ h1 {
     position: fixed;
     max-width: 100%;
     bottom: 40px;
+    text-shadow: 2px 3px 3px rgba(0, 0, 0, 0.7);
 
     body.woman & {
       color: #030303;
+      text-shadow: 2px 3px 3px rgba(110, 110, 110, 0.7);
     }
   }
 }
@@ -637,7 +664,7 @@ h1 {
     @include screen-768 {
       width: 150px;
       height: 150px;
-      top: 16%;
+      top: 12%;
       left: 0;
     }
   }
@@ -650,18 +677,23 @@ h1 {
       width: rem(142px);
       height: rem(82px);
       background-image: url("../images/computer-man-bg-2.png");
+      background-size: contain;
     }
 
     body.woman & {
       width: rem(115px);
       height: rem(115px);
       background-image: url("../images/computer-woman-bg-3.png");
+      background-size: contain;
+
+      @include screen-768 {
+        width: 80px;
+        height: 80px;
+      }
     }
 
-    background-size: contain;
-
     @include screen-768 {
-      top: 22%;
+      top: 20%;
       right: 5%;
     }
   }
@@ -674,26 +706,29 @@ h1 {
       width: rem(300px);
       height: rem(270px);
       background-image: url("../images/computer-man-bg-3.png");
+      background-size: contain;
+
+      @include screen-768 {
+        width: 180px;
+        height: 140px;
+      }
     }
 
     body.woman & {
       width: rem(250px);
       height: rem(260px);
       background-image: url("../images/computer-woman-bg-4.png");
-    }
+      background-size: contain;
 
-    background-size: contain;
-
-    @include screen-768 {
-      width: 180px;
-      height: 140px;
-      top: 61%;
-      right: 0;
-
-      body.woman & {
+      @include screen-768 {
         width: 120px;
         height: 125px;
       }
+    }
+
+    @include screen-768 {
+      top: 67%;
+      right: 0;
     }
   }
 
@@ -705,21 +740,29 @@ h1 {
       width: rem(200px);
       height: rem(200px);
       background-image: url("../images/computer-man-bg-4.png");
+      background-size: contain;
+
+      @include screen-768 {
+        width: 100px;
+        height: 100px;
+      }
     }
 
     body.woman & {
       width: rem(140px);
       height: rem(140px);
       background-image: url("../images/computer-woman-bg-2.png");
+      background-size: contain;
+
+      @include screen-768 {
+        width: 70px;
+        height: 70px;
+      }
     }
 
-    background-size: contain;
-
     @include screen-768 {
-      width: 100px;
-      height: 100px;
       left: 1%;
-      top: 60%;
+      top: 68%;
     }
   }
 
@@ -772,7 +815,7 @@ h1 {
     max-height: 400px;
     max-width: rem(400px);
 
-    @include screen-768() {
+    @include screen-768 {
       max-height: 350px;
       max-width: 100%;
     }
