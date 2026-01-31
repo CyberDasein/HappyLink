@@ -7,7 +7,8 @@ body {
   background-size: cover;
   height: 100vh;
   line-height: 1.2;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   font-family: "TeletactileRus", sans-serif;
 
   &.woman {
@@ -523,13 +524,13 @@ img {
 
     &.baloon-seven {
       top: -7vh;
-      right: 36vw;
+      right: 41vw;
       width: 215px;
       height: 147.5px;
     }
 
     &.baloon-eight {
-      right: 31vw;
+      right: 28vw;
       width: 201px;
       height: 155px;
     }

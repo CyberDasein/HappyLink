@@ -5,7 +5,8 @@ body {
   background-position: center center;
   background-size: cover;
   height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   background-attachment: fixed;
   transition: background-position 0.2s ease-out;
   animation: filterBackground 11s ease-in-out infinite alternate;
@@ -88,7 +89,7 @@ body {
 
   &__text {
     display: inline-block;
-    animation: marquee-scroll 20s linear infinite;
+    animation: marquee-scroll 22s linear infinite;
     font-size: 70px;
     font-family: AlphaSmart3000, sans-serif;
     text-shadow: 0px 4px 4px rgba(255, 219, 250, 0.4);
@@ -111,7 +112,6 @@ body {
   top: 36%;
   left: 78px;
   width: 294px;
-  height: 540px;
   font-family: Rosencrantz;
   font-size: 18px;
   text-transform: uppercase;
@@ -132,7 +132,14 @@ body {
       background: linear-gradient(180deg, #7C5E7C 0%, #E0CBE0 10%, #EBDEEB 20%, #FFFFFF 30%, #FFFFFF 50%, #FFFFFF 70%, #EBDEEB 80%, #E0CBE0 90%, #7C5E7C 100%);
     }
   }
+  &__bottom {
+    margin-top: 24px;
 
+    .terminal-list__line {
+      margin-top: 4px;
+      justify-content: center;
+    }
+  }
   &__top {
     text-align: center;
     margin-bottom: 12px;

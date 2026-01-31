@@ -51,7 +51,9 @@ export default function initComputer(cardData) {
     const dialogLayout = document.querySelector('.dialog-layout')
 
     if (baloon1) {
+        document.querySelector('body').style.overflowY = "hidden";
         baloon1.addEventListener('animationend', () => {
+            document.querySelector('body').style.overflowY = "auto";
             setTimeout(() => {
                 document.querySelector('.baloons').style.zIndex = -1;
                 dialogOpenBtn.classList.add("animated")

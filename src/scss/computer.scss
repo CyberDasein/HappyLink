@@ -1,11 +1,12 @@
 @use "common"as *;
 
 body {
+  position: relative;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   background-attachment: fixed;
   transition: background-position 0.2s ease-out;
   background-color: #0C0C0C;
@@ -19,7 +20,6 @@ body {
     bottom: 0;
     background-size: cover;
     background-position: center;
-    height: 100vh;
     background-repeat: no-repeat;
     animation: filterBackground 15s ease-in-out infinite alternate;
     z-index: 10;
@@ -319,6 +319,7 @@ h1 {
   width: 75vw;
   margin: 0 auto;
   padding-top: 40px;
+  padding-bottom: 40px;
   text-align: center;
   overflow: hidden;
   z-index: 11;
@@ -330,7 +331,7 @@ h1 {
     position: absolute;
     top: 0;
     left: 0;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     background-color: #0C0C0C;
     z-index: -1;
@@ -374,6 +375,10 @@ h1 {
   max-width: max-content;
   margin: 0 auto;
   z-index: 100;
+
+  @include screen-568 {
+    padding-bottom: 40px;
+  }
 
   .computer-img {
     @include screen-568 {
@@ -462,9 +467,9 @@ h1 {
   &.baloon-three {
     width: rem(280px);
     height: rem(200px);
-    left: 30vw;
+    left: 23vw;
     transform: translateY(-100%);
-    animation: up 5s linear forwards 3.6s;
+    animation: up 5s linear forwards 3.5s;
   }
 
   &.baloon-four {
@@ -494,9 +499,9 @@ h1 {
   &.baloon-seven {
     width: rem(330px);
     height: rem(235px);
-    right: 30vw;
+    right: 32vw;
     transform: translateY(-100%);
-    animation: up 5s linear forwards 4.7s;
+    animation: up 5s linear forwards 4.2s;
   }
 
   &.baloon-eight {
@@ -512,7 +517,7 @@ h1 {
     height: rem(212px);
     right: 17vw;
     transform: translateY(-100%);
-    animation: up 5s linear forwards 3.5s;
+    animation: up 5s linear forwards 4.3s;
   }
 
   &.baloon-ten {
@@ -551,7 +556,7 @@ h1 {
     }
 
     &.baloon-five {
-      left: 42vw;
+      left: 48vw;
       width: 207px;
       height: 151px;
     }
@@ -563,7 +568,7 @@ h1 {
 
     &.baloon-seven {
       top: -7vh;
-      right: 33vw;
+      right: 37vw;
       width: 215px;
       height: 147.5px;
     }
@@ -576,7 +581,7 @@ h1 {
 
     &.baloon-nine {
       top: -7vh;
-      right: 5vw;
+      right: 15vw;
       width: 197.5px;
       height: 141px;
     }
@@ -585,7 +590,7 @@ h1 {
       width: 150px;
       height: 196px;
       right: 24vw;
-      animation: up 7s linear forwards 4s;
+      animation: up 9s linear forwards 4s;
     }
   }
 }
@@ -621,11 +626,11 @@ h1 {
 }
 
 .dialog-layout {
-  position: absolute;
-  top: 0;
+  position: fixed;
+  top: -20px;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: calc(100% + 20px);
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(5px);
   z-index: 1111;
@@ -899,7 +904,7 @@ h1 {
   }
 
   &--right {
-    top: 38vh;
+    top: 38%;
     right: 30vw;
     z-index: 100;
 
@@ -912,7 +917,7 @@ h1 {
       margin: rem(40px) auto;
       transform: rotate(0);
       right: 14vw;
-      top: 30vh;
+      top: 32vh;
       animation: none;
     }
 
