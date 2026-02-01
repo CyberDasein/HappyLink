@@ -21,14 +21,14 @@ body {
 
 #date-str {
   font-size: 18px;
-  font-weight: bold;
-  font-family: couriernewbold;
+  font-weight: 400;
+  font-family: "Copse", serif;
 }
 
 #client-info {
   font-size: 15px;
-  font-weight: bold;
-  font-family: couriernewbold;
+  font-weight: 400;
+  font-family: "Copse", serif;
 }
 
 .car_wrap {
@@ -109,7 +109,7 @@ body {
 
   body.man & {
     background-image: linear-gradient(to top,
-        #080114, #120324, #1d0436, #240244, #260355, #300362, #3a026f, #45007a, #5a0072, #6a0066, #9f1c7a, #b6316b);
+        #6E92FF 0%, #866ACA 19.71%, #3C0670 100%);
   }
 
   body.woman & {
@@ -155,17 +155,23 @@ body {
   margin-right: auto;
   max-height: 60vh;
   text-align: center;
-  font-family: couriernewbold;
+  font-family: "Astrella", serif;
   font-size: rem(130px);
   font-weight: 700;
   text-transform: uppercase;
-  color: #ee91ae;
   text-shadow: 1px 1px #fff, -1px -1px #fff, -1px 1px #fff, 1px -1px #fff, 1px 0px #fff, -1px 0px #fff, 0px -1px #fff, 0px 1px #fff, 0px 0px 12px #ee91ae;
   position: absolute;
   inset: 0;
   transform: rotate(-8deg);
   z-index: 100;
 
+  body.man & {
+    color: #70FFDE;
+  }
+  body.woman & {
+    color: #ee91ae;
+
+  }
   span {
     display: block;
   }

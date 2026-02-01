@@ -29,6 +29,22 @@ $blue: #0682FF;
 }
 
 @font-face {
+  font-family: "Copse";
+  src: url("../fonts/Copse-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Astrella";
+  src: url("../fonts/Astrella.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "handjet";
   src: url("../fonts/handjet-regular.ttf") format("truetype");
   font-weight: bold;
