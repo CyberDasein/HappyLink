@@ -42,10 +42,10 @@ export default function initJumble(cardData) {
 
   const baloon1 = document.querySelector('.baloon-one');
   if (baloon1) {
-    document.querySelector('body').style.overflowY = "hidden";
+   //document.querySelector('body').style.overflowY = "hidden";
     baloon1.addEventListener('animationend', () => {
       document.querySelector('.baloons').style.zIndex = -1;
-      document.querySelector('body').style.overflowY = "auto";
+      //document.querySelector('body').style.overflowY = "auto";
       heartButtons[0].click();
     });
   }

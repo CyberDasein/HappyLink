@@ -55,7 +55,7 @@ body {
         content: "";
         display: block;
         position: absolute;
-        top: 15%;
+        top: 13%;
         left: -26px;
         width: 76px;
         height: 106px;
@@ -68,7 +68,7 @@ body {
         content: "";
         display: block;
         position: absolute;
-        top: 16%;
+        top: 15%;
         right: 4%;
         width: 45px;
         height: 60px;
@@ -246,9 +246,6 @@ img {
       margin: rem(40px) auto;
     }
 
-    @include screen-568 {
-      margin-top: rem(100px);
-    }
   }
 
   &--right {
@@ -268,6 +265,9 @@ img {
     @include screen-768 {
       margin: rem(40px) auto;
       transform: rotate(0);
+    }
+    @include screen-568 {
+      margin-top: 0;
     }
   }
 
