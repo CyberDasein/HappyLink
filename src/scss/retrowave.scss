@@ -156,11 +156,12 @@ body {
   max-height: 60vh;
   text-align: center;
   font-family: "Astrella", serif;
-  font-size: rem(130px);
+  font-size: rem(148px);
   font-weight: 700;
   text-transform: uppercase;
   text-shadow: 1px 1px #fff, -1px -1px #fff, -1px 1px #fff, 1px -1px #fff, 1px 0px #fff, -1px 0px #fff, 0px -1px #fff, 0px 1px #fff, 0px 0px 12px #ee91ae;
   position: absolute;
+  letter-spacing: 10px;
   inset: 0;
   transform: rotate(-8deg);
   z-index: 100;
@@ -184,6 +185,7 @@ body {
     width: 100%;
     transform: rotate(0);
     font-size: 56px;
+    letter-spacing: 6px;
   }
 }
 
