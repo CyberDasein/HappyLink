@@ -2,7 +2,9 @@ const templateInitMap = {
   computer: () => import('./templates/computer.js'),
   jumble: () => import('./templates/jumble.js'),
   retrowave: () => import('./templates/retrowave.js'),
-  terminal: () => import('./templates/terminal.js')
+  terminal: () => import('./templates/terminal.js'),
+  valentines1: () => import('./templates/valentines1.js'),
+    valentines2: () => import('./templates/valentines2.js')
 };
 
 document.addEventListener('DOMContentLoaded', async () => {

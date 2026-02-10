@@ -21,6 +21,49 @@ $blue: #0682FF;
 }
 
 @font-face {
+  font-family: "druk";
+  src: url("../fonts/druk.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "verbenac";
+  src: url("../fonts/verbenac.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atziluth";
+  src: url("../fonts/Atziluth.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Literata";
+  src: url("../fonts/Literata.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Felidae";
+  src: url("../fonts/Felidae.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Esteban";
+  src: url("../fonts/Esteban.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Bokor";
   src: url("../fonts/Bokor-Regular.ttf") format("truetype");
   font-weight: normal;

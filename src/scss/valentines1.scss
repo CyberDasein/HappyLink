@@ -1,0 +1,572 @@
+@use 'common'as *;
+
+body {
+    position: relative;
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+    line-height: 1.2;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-image: url("../images/valentines1_bg.png");
+    background-color: $light-pink;
+
+    @include screen-768 {
+        background-image: url("../images/valentines1_bg-mob.png");
+    }
+}
+
+.center-section {
+    padding: rem(50px) 0;
+    margin: 0 auto;
+    text-align: center;
+
+    @include screen-768 {
+        padding-top: 40px;
+        padding-bottom: 150px;
+    }
+
+    @include screen-568 {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+h1 {
+    color: #FFF6F6;
+    font-size: rem(90px);
+    font-weight: 700;
+    font-family: "druk";
+
+    span {
+        display: block;
+        font-family: "Atziluth";
+        font-size: rem(100px);
+        font-weight: 500;
+
+        @include screen-768 {
+            font-size: 52px;
+        }
+    }
+
+    @include screen-768 {
+        font-size: 40px;
+    }
+
+    @include screen-568 {
+        hyphens: auto;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+}
+
+.envelope-container {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: rem(150px);
+    position: relative;
+
+    @include screen-768 {
+        margin-top: 290px;
+        min-height: 500px;
+    }
+
+    @include screen-568 {
+        min-height: 454px;
+    }
+
+}
+
+.envelope {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.envelope-closed {
+    position: absolute;
+    width: rem(600px);
+    height: rem(406px);
+    background-image: url('../images/letter-rose.png');
+    transition: transform 0.8s ease, opacity 0.8s ease;
+    z-index: 3;
+    cursor: pointer;
+
+    @include screen-568 {
+        width: 288px;
+        height: 208px;
+        background-size: contain;
+    }
+}
+
+.envelope-open {
+    position: absolute;
+    width: rem(600px);
+    height: rem(710px);
+    background-image: url('../images/letter-rose-opened.png');
+    opacity: 0;
+    transform: translateY(0) rotateX(90deg);
+    transition: transform 0.8s ease, opacity 0.8s ease;
+    z-index: 2;
+
+    @include screen-568 {
+        width: 288px;
+        height: 330px;
+        background-size: contain;
+    }
+}
+
+.letter {
+    position: absolute;
+    width: rem(520px);
+    height: rem(500px);
+    background: white;
+    padding: rem(20px);
+    transform: scale(0.8) translateY(-10%);
+    opacity: 0;
+    z-index: 111;
+    background-image: url('../images/paper_bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: rem(20px);
+    border: rem(20px) solid #ff99bb;
+    font-size: rem(24px);
+    font-family: "verbenac";
+    transition: all 1s ease;
+    color: #D1304B;
+
+    h2 {
+        font-family: "Esteban";
+        font-size: rem(54px);
+        margin-bottom: rem(40px);
+        line-height: 1;
+
+        @include screen-568 {
+            font-size: 32px;
+        }
+    }
+
+    .date {
+        margin-top: rem(24px);
+        text-align: left;
+    }
+
+    h3 {
+        font-size: rem(32px);
+        margin-bottom: rem(16px);
+    }
+
+    .message {
+        max-height: 124px;
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+            /* Ширина вертикального скроллбара */
+            height: 6px;
+            /* Высота горизонтального скроллбара */
+        }
+
+        &::-webkit-scrollbar-track {
+            background: #c1c1c1;
+            /* Цвет фона дорожки */
+            border-radius: 6px;
+            /* Скругление */
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #ff99bb;
+            /* Цвет ползунка */
+            border-radius: 6px;
+            /* Скругление ползунка */
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+            /* Цвет ползунка при наведении */
+        }
+    }
+
+    @include screen-1024 {
+        height: rem(570px);
+    }
+
+    @include screen-568 {
+        width: 100%;
+        height: auto;
+        min-height: 380px;
+    }
+
+}
+
+
+.envelope-container.opened .envelope-closed {
+    opacity: 0;
+
+    @include screen-768 {}
+}
+
+.envelope-container.opened .envelope-open {
+    opacity: 1;
+    transform: translateY(-33%) rotateX(0deg);
+
+    @include screen-568 {
+        transform: translateY(-50%);
+    }
+}
+
+.envelope-container.opened .letter {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    animation: floatUp 4s ease forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: scale(0.5) translateY(-15%);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.05) translateY(-18%);
+    }
+
+    100% {
+        transform: scale(1) translateY(-20%);
+        opacity: 1;
+    }
+}
+
+
+.photo-container {
+    position: absolute;
+    right: 7%;
+
+    .photo {
+        position: relative;
+
+        &::after {
+            content: '';
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            right: -13%;
+            top: -24%;
+            display: block;
+            background: url('../images/photo-pin.png') no-repeat center;
+            z-index: -1;
+
+            @include screen-568 {
+                right: -20px;
+            }
+        }
+
+        &::before {
+            content: '';
+            height: rem(120px);
+            width: rem(60px);
+            position: absolute;
+            top: 0;
+            left: 30%;
+            top: -17%;
+            display: block;
+            background: url('../images/pin.png') no-repeat center;
+            background-size: contain;
+            z-index: 1;
+        }
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        right: -14%;
+        bottom: -18%;
+        display: block;
+        width: rem(170px);
+        height: rem(140px);
+        background: url('../images/photo-belt.png') no-repeat center;
+        background-size: contain;
+
+        @include screen-768 {
+            right: 23%;
+        }
+
+        @include screen-568 {
+            right: 0;
+        }
+    }
+
+    img {
+        max-width: 450px;
+        max-height: 450px;
+        object-fit: contain;
+
+        @include screen-568 {
+            max-width: 100%;
+        }
+    }
+
+    @include screen-768 {
+        position: relative;
+        right: 0;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.letter-info {
+    position: relative;
+    text-align: left;
+    margin-bottom: rem(40px);
+
+    .from,
+    .to {
+        border-bottom: 1px solid #D1304B;
+        max-width: max-content;
+        padding-bottom: 2px;
+    }
+
+    .mark {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #ff69b4;
+        font-size: 24px;
+        opacity: 0;
+        animation: fadeIn 3s ease 6s forwards;
+        width: rem(80px);
+        height: rem(76px);
+        background: url("../images/heart-mark.png") no-repeat center;
+        background-size: contain;
+    }
+
+    span {
+        display: inline-block;
+        font-family: "Felidae";
+        font-size: rem(20px);
+        margin-right: rem(20px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.bubble {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(240, 35, 87, 0.6);
+    border-radius: 50%;
+    opacity: 0;
+    animation: bubbleFloat 7s infinite;
+
+    @include screen-768 {
+        bottom: 0;
+    }
+}
+
+@keyframes bubbleFloat {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.6;
+    }
+
+    90% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-200px) translateX(20px);
+        opacity: 0;
+    }
+}
+
+.heart-container {
+    position: absolute;
+    left: 4%;
+    top: 42%;
+
+    @include screen-768 {
+        position: relative;
+        text-align: center;
+        display: flex;
+        margin-top: 36px;
+        justify-content: center;
+        left: 0;
+    }
+}
+
+.cupidon {
+    position: absolute;
+    left: 24%;
+    bottom: 5%;
+    width: rem(180px);
+    height: rem(242px);
+    background: url("../images/cupidon.png") no-repeat center;
+    background-size: cover;
+
+    @include screen-768 {
+        left: 13%;
+        bottom: 30%;
+    }
+
+    @include screen-568 {
+        bottom: 12%;
+        left: 5%;
+    }
+}
+
+.heart-bg-item-1 {
+    position: absolute;
+    right: 29%;
+    bottom: 16%;
+    width: rem(82px);
+    height: rem(70px);
+    background: url("../images/soft-heart.png") no-repeat center;
+    background-size: cover;
+
+    @include screen-768 {
+        bottom: 40%;
+    }
+
+    @include screen-568 {
+        bottom: 13%;
+        right: 10%;
+    }
+}
+
+.heart-bg-item-2 {
+    position: absolute;
+    right: 25%;
+    bottom: 0;
+    width: rem(122px);
+    height: rem(105px);
+    background: url("../images/soft-heart.png") no-repeat center;
+    background-size: cover;
+
+    @include screen-768 {
+        bottom: 30%;
+        right: 20%;
+    }
+
+    @include screen-568 {
+        bottom: 24%;
+        right: 10%;
+    }
+}
+
+.heart-bg-item-3 {
+    display: none;
+    position: absolute;
+    right: 29%;
+    bottom: 16%;
+    width: 96px;
+    height: 82px;
+    background: url("../images/soft-heart.png") no-repeat center;
+    background-size: cover;
+
+    @include screen-768 {
+        display: block;
+        bottom: -25%;
+        right: 5%;
+        transform: rotate(20deg);
+    }
+
+    @include screen-568 {
+        right: 32%;
+        bottom: -29%;
+    }
+}
+
+.heart-bg-item-4 {
+    display: none;
+    position: absolute;
+    right: 29%;
+    bottom: 16%;
+    width: 54px;
+    height: 47px;
+    background: url("../images/soft-heart.png") no-repeat center;
+    background-size: cover;
+
+    @include screen-768 {
+        display: block;
+        left: 10%;
+        bottom: -15%;
+    }
+}
+
+#heart {
+    position: relative;
+    width: rem(450px);
+    height: rem(400px);
+
+    svg {
+        animation: heartbeat 7s infinite;
+    }
+
+    .heart-inner {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        padding-top: rem(100px);
+        z-index: 10;
+        color: #EDECEE;
+        font-size: rem(24px);
+        font-family: "verbenac";
+
+        .heart-text {
+            margin-bottom: rem(16px);
+            font-size: rem(44px);
+        }
+
+        .heart-days {
+            font-family: "Literata";
+            font-weight: 600;
+
+            strong {
+                font-size: rem(44px);
+            }
+        }
+
+        .heart-date {
+            margin-top: rem(24px);
+        }
+    }
+}
+
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(0.85);
+    }
+
+    20% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(0.85);
+    }
+
+    60% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0.85);
+    }
+}
