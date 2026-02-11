@@ -19,18 +19,18 @@
 
     <div class="center-section">
 
-        <h1 lang="en"><span>Happy </span> valentine's day</h1>
+        <h1 lang="ru"><span>С &nbsp; Днем</span> ВСЕХ ВЛЮБЛЕННЫХ</h1>
 
         <div class="heart-container">
             <div id="heart" class="heart">
-                <svg fill="#D896A8" viewBox="0 0 32 29.6">
+                <svg fill="#DB3E8D" viewBox="0 0 32 29.6">
                     <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
                         c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z" />
                 </svg>
                 <div class="heart-inner">
                     <div class="heart-text">Люблю тебя</div>
                     <div class="heart-days"><strong>1568</strong> <br> дней</div>
-                    <div class="heart-date">с 12.03.24</div>
+                    <div class="heart-date">с xx.xx.xx</div>
                 </div>
             </div>
         </div>
@@ -42,25 +42,28 @@
                 <div class="letter">
                     <h2>A LOVE LETTER</h2>
                     <div class="letter-info">
-                        <div class="from"><span>От</span> Александры</div>
-                        <div class="to"><span>Для</span> Константина</div>
+                        <div class="from"><span>От</span> <%= cardDataJson.sender_rp %></div>
+                        <div class="to"><span>Для</span> <%= cardDataJson.name %></div>
 
                         <div class="mark"></div>
                     </div>
 
                     <div class="letter-content">
                         <h3>Мой любимый!</h3>
-                        <p class="message">С Днем влюбленных! Ты — мой самый уютный дом и самое сумасшедшее приключение.
-                            <br> Спасибо, что делаешь меня счастливой каждый день. Люблю тебя бесконечно!
+                        <p class="message">
+                            <%= cardDataJson.message %>
                         </p>
                         <div class="date">14.02.2026</div>
                     </div>
                 </div>
             </div>
+            <div class="lighter"></div>
+            <div class="heart-bg-item-1"></div>
+            <div class="heart-bg-item-2"></div>
         </div>
         <div class="photo-container">
             <div class="photo">
-                <img src="<%= images.photohorizontal %>" alt="photo">
+                <img src="<%= cardDataJson.photo %>" alt="photo">
             </div>
             <div class="heart-bg-item-3"></div>
             <div class="heart-bg-item-4"></div>

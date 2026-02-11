@@ -50,7 +50,7 @@ h1 {
     }
 
     @include screen-768 {
-        font-size: 40px;
+        font-size: 38px;
     }
 
     @include screen-568 {
@@ -245,57 +245,20 @@ h1 {
 
     .photo {
         position: relative;
-
-        &::after {
-            content: '';
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            top: 0;
-            right: -13%;
-            top: -24%;
-            display: block;
-            background: url('../images/photo-pin.png') no-repeat center;
-            z-index: -1;
-
-            @include screen-568 {
-                right: -20px;
-            }
-        }
-
-        &::before {
-            content: '';
-            height: rem(120px);
-            width: rem(60px);
-            position: absolute;
-            top: 0;
-            left: 30%;
-            top: -70px;
-            display: block;
-            background: url('../images/pin.png') no-repeat center;
-            background-size: contain;
-            z-index: 1;
-        }
     }
 
     &::after {
         content: '';
         position: absolute;
-        right: -14%;
-        bottom: -18%;
+        top: -19%;
         display: block;
-        width: rem(170px);
-        height: rem(140px);
-        background: url('../images/photo-belt.png') no-repeat center;
+        width: rem(290px);
+        height: rem(164px);
+        background: url('../images/photo-bant.png') no-repeat center;
         background-size: contain;
 
-        @include screen-768 {
-            right: 23%;
-        }
-
         @include screen-568 {
-            bottom: -9%;
-            right: 0;
+            top: -14%;
         }
     }
 
@@ -351,7 +314,7 @@ h1 {
         animation: fadeIn 3s ease 6s forwards;
         width: rem(80px);
         height: rem(76px);
-        background: url("../images/heart-mark.png") no-repeat center;
+        background: url("../images/red-mark.png") no-repeat center;
         background-size: contain;
     }
 
@@ -437,7 +400,7 @@ h1 {
     }
 
     @include screen-568 {
-        bottom: 12%;
+        bottom: 0;
         left: 5%;
     }
 }
@@ -452,7 +415,10 @@ h1 {
     background-size: cover;
 
     @include screen-568 {
-        right: 10%;
+        right: 0;
+        width: 85px;
+        height: 85px;
+        bottom: 50%;
     }
 }
 
@@ -471,8 +437,8 @@ h1 {
     }
 
     @include screen-568 {
-        bottom: 24%;
-        right: 10%;
+       bottom: 2%;
+       right: 4%;
     }
 }
 

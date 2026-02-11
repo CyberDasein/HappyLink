@@ -1,6 +1,26 @@
 export default function initValentines1(cardData) {
     const container = document.getElementById('envelopeContainer');
 
+    // Преобразование даты
+    const originalDate = new Date(cardData.dateStr);
+    const day = String(originalDate.getDate()).padStart(2, '0');
+    const month = String(originalDate.getMonth() + 1).padStart(2, '0'); // Месяцы начинаются с 0
+    const year = String(originalDate.getFullYear()).toString().slice(-2);
+    const formattedDate = `с ${day}.${month}.${year}`;
+    document.querySelector('.heart-date').textContent = formattedDate;
+
+    const pastDate = new Date(cardData.dateStr);
+    const currentDate = new Date();
+
+    pastDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+
+    const diffTime = currentDate - pastDate;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+
+    document.querySelector('.heart-days strong').textContent = diffDays;
+
     // Создаем пузырьки
     for (let i = 0; i < 20; i++) {
         createBubble();

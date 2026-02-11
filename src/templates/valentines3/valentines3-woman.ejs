@@ -30,7 +30,7 @@
                 <div class="heart-inner">
                     <div class="heart-text">Люблю тебя</div>
                     <div class="heart-days"><strong>1568</strong> <br> дней</div>
-                    <div class="heart-date">с 12.03.24</div>
+                    <div class="heart-date">с xx.xx.xx</div>
                 </div>
             </div>
         </div>
@@ -42,16 +42,16 @@
                 <div class="letter">
                     <h2>A LOVE LETTER</h2>
                     <div class="letter-info">
-                        <div class="from"><span>От</span> Александры</div>
-                        <div class="to"><span>Для</span> Константина</div>
+                        <div class="from"><span>От</span> <%= cardDataJson.sender_rp %></div>
+                        <div class="to"><span>Для</span> <%= cardDataJson.name %></div>
 
                         <div class="mark"></div>
                     </div>
 
                     <div class="letter-content">
                         <h3>Мой любимый!</h3>
-                        <p class="message">С Днем влюбленных! Ты — мой самый уютный дом и самое сумасшедшее приключение.
-                            <br> Спасибо, что делаешь меня счастливой каждый день. Люблю тебя бесконечно!
+                        <p class="message">
+                            <%= cardDataJson.message %>
                         </p>
                         <div class="date">14.02.2026</div>
                     </div>
@@ -63,7 +63,7 @@
         </div>
         <div class="photo-container">
             <div class="photo">
-                <img src="<%= images.photohorizontal %>" alt="photo">
+                <img src="<%= cardDataJson.photo %>" alt="photo">
             </div>
             <div class="heart-bg-item-3"></div>
             <div class="heart-bg-item-4"></div>
