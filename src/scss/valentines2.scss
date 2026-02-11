@@ -12,7 +12,7 @@ body {
     background-color: $light-pink;
 
     @include screen-768 {
-       // background-image: url("../images/valentines1_bg-mob.png");
+        background-image: url("../images/valentines2_bg-mob.png");
     }
 }
 
@@ -38,12 +38,14 @@ h1 {
     font-weight: 700;
     font-family: "druk";
     text-transform: uppercase;
+
     span {
         display: block;
         font-family: "Atziluth";
         font-size: rem(100px);
         font-weight: 500;
         text-transform: initial;
+
         @include screen-768 {
             font-size: 52px;
         }
@@ -69,7 +71,7 @@ h1 {
     position: relative;
 
     @include screen-768 {
-        margin-top: 290px;
+        margin-top: 275px;
         min-height: 500px;
     }
 
@@ -270,7 +272,7 @@ h1 {
             position: absolute;
             top: 0;
             left: 30%;
-            top: -17%;
+            top: -70px;
             display: block;
             background: url('../images/pin.png') no-repeat center;
             background-size: contain;
@@ -290,21 +292,27 @@ h1 {
         background-size: contain;
 
         @include screen-768 {
-            right: 23%;
+            display: none;
         }
 
-        @include screen-568 {
-            right: 0;
-        }
     }
 
     img {
-        max-width: 450px;
-        max-height: 450px;
+        max-width: rem(400px);
+        max-height: rem(450px);
         object-fit: contain;
+
+        @include screen-1600 {
+            max-width: rem(300px);
+        }
+
+        @include screen-1024 {
+            max-width: rem(400px);
+        }
 
         @include screen-568 {
             max-width: 100%;
+            max-height: 450px;
         }
     }
 
@@ -313,6 +321,10 @@ h1 {
         right: 0;
         display: flex;
         justify-content: center;
+    }
+
+    @include screen-568 {
+        min-height: 320px;
     }
 }
 
@@ -486,8 +498,8 @@ h1 {
     }
 
     @include screen-568 {
-        right: 32%;
-        bottom: -29%;
+        right: 6%;
+        bottom: -34%;
     }
 }
 

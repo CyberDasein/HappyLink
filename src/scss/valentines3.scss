@@ -8,11 +8,11 @@ body {
     line-height: 1.2;
     overflow-x: hidden;
     overflow-y: auto;
-    background-image: url("../images/valentines1_bg.png");
+    background-image: url("../images/valentines3_bg.png");
     background-color: $light-pink;
 
     @include screen-768 {
-        background-image: url("../images/valentines1_bg-mob.png");
+        //background-image: url("../images/valentines1_bg-mob.png");
     }
 }
 
@@ -88,7 +88,7 @@ h1 {
     position: absolute;
     width: rem(600px);
     height: rem(406px);
-    background-image: url('../images/letter-rose.png');
+    background-image: url('../images/letter-red.png');
     transition: transform 0.8s ease, opacity 0.8s ease;
     z-index: 3;
     cursor: pointer;
@@ -104,7 +104,7 @@ h1 {
     position: absolute;
     width: rem(600px);
     height: rem(710px);
-    background-image: url('../images/letter-rose-opened.png');
+    background-image: url('../images/letter-red-opened.png');
     opacity: 0;
     transform: translateY(0) rotateX(90deg);
     transition: transform 0.8s ease, opacity 0.8s ease;
@@ -130,11 +130,11 @@ h1 {
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: rem(20px);
-    border: rem(20px) solid #ff99bb;
+    border: rem(20px) solid #A41211;
     font-size: rem(24px);
     font-family: "verbenac";
     transition: all 1s ease;
-    color: #D1304B;
+    color: #E0002D;
 
     h2 {
         font-family: "Esteban";
@@ -336,7 +336,7 @@ h1 {
 
     .from,
     .to {
-        border-bottom: 1px solid #D1304B;
+        border-bottom: 1px solid #E0002D;
         max-width: max-content;
         padding-bottom: 2px;
     }
@@ -422,13 +422,13 @@ h1 {
     }
 }
 
-.cupidon {
+.lighter {
     position: absolute;
     left: 24%;
     bottom: 5%;
     width: rem(180px);
-    height: rem(242px);
-    background: url("../images/cupidon.png") no-repeat center;
+    height: rem(210px);
+    background: url("../images/red-lighter.png") no-repeat center;
     background-size: cover;
 
     @include screen-768 {
@@ -444,30 +444,25 @@ h1 {
 
 .heart-bg-item-1 {
     position: absolute;
-    right: 29%;
-    bottom: 16%;
-    width: rem(82px);
-    height: rem(70px);
-    background: url("../images/soft-heart.png") no-repeat center;
+    right: 27%;
+    bottom: 45%;
+    width: rem(160px);
+    height: rem(160px);
+    background: url("../images/apple.png") no-repeat center;
     background-size: cover;
 
-    @include screen-768 {
-        bottom: 40%;
-    }
-
     @include screen-568 {
-        bottom: 13%;
         right: 10%;
     }
 }
 
 .heart-bg-item-2 {
     position: absolute;
-    right: 25%;
+    right: 23%;
     bottom: 0;
-    width: rem(122px);
-    height: rem(105px);
-    background: url("../images/soft-heart.png") no-repeat center;
+    width: rem(182px);
+    height: rem(156px);
+    background: url("../images/yes-heart.png") no-repeat center;
     background-size: cover;
 
     @include screen-768 {

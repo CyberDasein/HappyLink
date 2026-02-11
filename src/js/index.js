@@ -4,7 +4,9 @@ const templateInitMap = {
   retrowave: () => import('./templates/retrowave.js'),
   terminal: () => import('./templates/terminal.js'),
   valentines1: () => import('./templates/valentines1.js'),
-    valentines2: () => import('./templates/valentines2.js')
+  valentines2: () => import('./templates/valentines2.js'),
+  valentines3: () => import('./templates/valentines2.js'),
+  valentines4: () => import('./templates/valentines2.js')
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
