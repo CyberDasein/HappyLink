@@ -35,6 +35,11 @@ bot.on('message', (msg) => {
     const userName = msg.from.username ? `@${msg.from.username}` : `ID: ${userId}`;
     const caption = msg.caption || 'Без подписи'; 
     
+    // Проверяем, является ли сообщение командой /start
+    if (msg.text === '/start') {
+        return; // Не отправляем повторное уведомление при старте
+    }
+    
     let userContent = '';
     let photoUrl = null;
 
