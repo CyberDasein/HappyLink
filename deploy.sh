@@ -36,6 +36,11 @@ else
   git checkout -b "$TARGET_BRANCH"
 fi
 
+# Ensure git won't automatically convert EOLs in the working copy (avoid LF -> CRLF warnings on Windows)
+git config core.autocrlf false || true
+git config core.eol lf || true
+git config core.safecrlf false || true
+
 echo "📁 Обновляем содержимое..."
 # Удаляем старые файлы (кроме .git) — переносимый и безопасный способ
 # Не используем сложные find-выражения, которые на некоторых платформах могут удалить .git
