@@ -83,10 +83,10 @@ try {
 }
 
 // Текст приветственного сообщения с шаблонами и вопросами
-const welcomeMessage = `🎉 Привет! Давай создадим твою уникальную цифровую открытку 💌\n\nОтправь мне по очереди:\n\n1. 
-Какой стиль тебе нравится? (выбери номер на картинках)\n2. Имя получателя подарка\n3. От кого открытка\n4. 
-Дата, с которой начинать отсчет дней любви (например, дата знакомства)\n5. 
-Текст сообщения для открытки\n6. Фото, которое хочешь добавить в открытку ❤️.\n\nКаждая открытка стоит 499р, действует постоплата.`;
+const welcomeMessage = `🎉 Привет! Давай создадим твою уникальную цифровую открытку 💌\n\nОтправь мне в одном сообщении:\n\n1. Какой стиль тебе нравится? (выбери номер на картинках)\n2. Имя получателя подарка\n3. От кого открытка\n4. Дата, с которой начинать отсчет дней любви (например, дата знакомства)\n5. Текст сообщения для открытки\n6. Фото, которое хочешь добавить в открытку ❤️\n\n
+Открытка будет готова в течение 15 минут.
+Каждая открытка стоит 499р, действует постоплата.
+По вопросам поддержки писать на @citizen66`;
 
 // Обработка команды /start
 bot.onText(/\/start/, (msg) => {
@@ -104,151 +104,85 @@ bot.onText(/\/start/, (msg) => {
     });
 });
 
-// Обработка всех текстовых сообщений от пользователей
-bot.on('message', (msg) => {
-    const chatId = msg.chat.id;
-    const userId = msg.from.id; // ID пользователя (может отличаться от username)
-    const userName = msg.from.username ? `@${msg.from.username}` : `ID: ${userId}`;
-    const userMessage = msg.text;
+// Хранение соответствий username -> chatId
+const userChats = new Map();
 
-    // Проверяем, что сообщение пришло не от администратора (чтобы не отправлять себе ответы)
-    // If message from admin and session active, handle admin flow
-    if (chatId.toString() === adminChatId) {
-        // Start create flow
-        if (userMessage && userMessage.toLowerCase() === '/create') {
-            sessions[chatId] = { index: 0, data: {} };
-            const field = ADMIN_FIELDS[0];
-            let prompt = `Введите: ${field.label}`;
-            if (field.type === 'choice') prompt += ` (${field.choices.join('/')})`;
-            bot.sendMessage(chatId, `Начинаем создание карточки. ${prompt}`);
-            return;
-        }
+// Обновляем данные о юзерах при каждом сообщении
+function updateUserChatData(msg) {
+    if (msg.from.username) {
+        const username = msg.from.username.toLowerCase();
+        userChats.set(username, msg.chat.id);
+    }
+}
 
-        // If session exists, accept answers
-        const session = sessions[chatId];
-        if (session) {
-            const field = ADMIN_FIELDS[session.index];
-            // PHOTO handling: if admin sent a photo for this step
-            if (field.type === 'photo' && msg.photo && msg.photo.length) {
-                // choose highest resolution
-                const fileId = msg.photo[msg.photo.length - 1].file_id;
-                (async () => {
-                    try {
-                        const fileInfo = await bot.getFile(fileId);
-                        const filePath = fileInfo.file_path; // e.g., photos/file_123.jpg
-                        const ext = path.extname(filePath) || '.jpg';
-                        const templateName = session.data.template || 'default';
-                        const destDir = path.join(__dirname, 'src', 'templates', templateName, 'images');
-                        fs.mkdirSync(destDir, { recursive: true });
-                        const filename = `${Date.now()}-${Math.random().toString(36).slice(2,8)}${ext}`;
-                        const outPath = path.join(destDir, filename);
-
-                        // download file from Telegram API
-                        const https = require('https');
-                        const fileUrl = `https://api.telegram.org/file/bot${token}/${filePath}`;
-                        const fileStream = fs.createWriteStream(outPath);
-                        https.get(fileUrl, (res) => {
-                            res.pipe(fileStream);
-                            fileStream.on('finish', () => {
-                                fileStream.close();
-                                // expose as /assets/<filename> so templates can use it
-                                session.data.photo = `/assets/${filename}`;
-                                bot.sendMessage(chatId, `Фото сохранено и будет использовано: ${session.data.photo}`);
-                                // move to next field
-                                session.index++;
-                                if (session.index >= ADMIN_FIELDS.length) {
-                                    // finish flow: write to file
-                                    try {
-                                        const arr = JSON.parse(fs.readFileSync(NEW_CARDS_PATH, 'utf8') || '[]');
-                                        arr.push(session.data);
-                                        fs.writeFileSync(NEW_CARDS_PATH, JSON.stringify(arr, null, 2));
-                                        bot.sendMessage(chatId, 'Карточка добавлена в new-cards.json. Хотите сейчас сгенерировать открытку?', {
-                                            reply_markup: { inline_keyboard: [[{ text: 'Сгенерировать и задеплоить', callback_data: 'GENERATE_AND_DEPLOY' }]] }
-                                        });
-                                    } catch (e) {
-                                        console.error('Failed to write new-cards.json', e);
-                                        bot.sendMessage(chatId, 'Ошибка при сохранении карточки.');
-                                    }
-                                    delete sessions[chatId];
-                                    return;
-                                }
-                                const next = ADMIN_FIELDS[session.index];
-                                let prompt2 = `Введите: ${next.label}`;
-                                if (next.type === 'choice') prompt2 += ` (${next.choices.join('/')})`;
-                                bot.sendMessage(chatId, prompt2);
-                            });
-                        }).on('error', (err) => {
-                            console.error('Ошибка при скачивании файла:', err);
-                            bot.sendMessage(chatId, 'Не удалось скачать фото. Попробуйте ещё раз.');
-                        });
-                    } catch (e) {
-                        console.error('Failed to fetch file info', e);
-                        bot.sendMessage(chatId, 'Ошибка обработки фото.');
-                    }
-                })();
-                return;
-            }
-
-            // If photo field expects a URL typed by admin
-            let value = userMessage || '';
-            if (field.type === 'photo' && value) {
-                // basic check: if it looks like a URL, store as-is
-                if (/^https?:\/\//i.test(value)) {
-                    session.data.photo = value;
-                    session.index++;
-                }
-            } else {
-                if (!value && !field.optional) {
-                    bot.sendMessage(chatId, `Поле обязательно: ${field.label}`);
-                    return;
-                }
-                // basic validation
-                if (field.type === 'choice' && value) {
-                    if (!field.choices.includes(value)) {
-                        bot.sendMessage(chatId, `Неверный выбор. ${field.label}: ${field.choices.join('/')}`);
-                        return;
-                    }
-                }
-                session.data[field.key] = value;
-                session.index++;
-            }
-            if (session.index >= ADMIN_FIELDS.length) {
-                // finished
-                // append to new-cards.json
-                try {
-                    const arr = JSON.parse(fs.readFileSync(NEW_CARDS_PATH, 'utf8') || '[]');
-                    arr.push(session.data);
-                    fs.writeFileSync(NEW_CARDS_PATH, JSON.stringify(arr, null, 2));
-                    bot.sendMessage(chatId, 'Карточка добавлена в new-cards.json. Хотите сейчас сгенерировать открытку?', {
-                        reply_markup: {
-                            inline_keyboard: [[{ text: 'Сгенерировать и задеплоить', callback_data: 'GENERATE_AND_DEPLOY' }]]
-                        }
-                    });
-                } catch (e) {
-                    console.error('Failed to write new-cards.json', e);
-                    bot.sendMessage(chatId, 'Ошибка при сохранении карточки.');
-                }
-                delete sessions[chatId];
-                return;
-            }
-            const next = ADMIN_FIELDS[session.index];
-            let prompt2 = `Введите: ${next.label}`;
-            if (next.type === 'choice') prompt2 += ` (${next.choices.join('/')})`;
-            bot.sendMessage(chatId, prompt2);
-            return;
-        }
-
-        // admin general messages forwarded to owner as well
-        const adminMessage = `🔔 Сообщение от админа:\n\n${userMessage}`;
-        bot.sendMessage(adminChatId, adminMessage);
+// Обработка команды /send_to
+bot.onText(/\/send_to\s+(@[\w]+)\s+(.+)$/i, (msg, match) => {
+    if (msg.chat.id.toString() !== adminChatId) {
+        bot.sendMessage(msg.chat.id, 'У вас нет прав для выполнения этой команды');
         return;
     }
+    const targetUsername = match[1].substring(1).toLowerCase();
+    const messageText = match[2].replace(/\\n/g, '\n'); // Заменяем \n на фактический перенос строки
+    const targetChatId = userChats.get(targetUsername);
+    if (!targetChatId) {
+        bot.sendMessage(msg.chat.id, `Пользователь ${match[1]} не найден в базе данных. Убедитесь, что он уже писал боту.`);
+        return;
+    }
+    bot.sendMessage(targetChatId, messageText, { parse_mode: 'HTML' })
+        .then(() => bot.sendMessage(msg.chat.id, `Сообщение успешно отправлено пользователю ${match[1]}`))
+        .catch(error => bot.sendMessage(msg.chat.id, `Ошибка при отправке сообщения пользователю ${match[1]}: ${error.message}`));
+});
 
-    // Regular user flow: forward to admin and acknowledge
-    if (chatId.toString() !== adminChatId) {
-        const adminMessage = `🔔 Новое сообщение от клиента:\n\nПользователь: ${userName}\nID: ${userId}\nСообщение: ${userMessage}`;
+// Обработка всех сообщений от пользователей (текст и фото)
+bot.on('message', (msg) => {
+    const chatId = msg.chat.id;
+    const userId = msg.from.id;
+    const userName = msg.from.username ? `@${msg.from.username}` : `ID: ${userId}`;
+    const caption = msg.caption || 'Без подписи'; 
+    
+    // Обновляем данные о чате пользователя
+    updateUserChatData(msg);
+    
+    // Проверяем, является ли сообщение командой /start
+    if (msg.text === '/start') {
+        return; // Не отправляем повторное уведомление при старте
+    }
+    
+    let userContent = '';
+    let photoUrl = null;
+
+    if (msg.text) {
+        userContent = `Текст: ${msg.text}`;
+    } else if (msg.photo) {
+        const fileId = msg.photo[msg.photo.length - 1].file_id;
+
+        // Получаем URL фото
+        bot.getFile(fileId).then((fileInfo) => {
+            photoUrl = `https://api.telegram.org/file/bot${token}/${fileInfo.file_path}`;
+            
+            userContent = `Фото: ${photoUrl} Подпись: ${caption}`;
+
+            const adminMessage = `🔔 Новое сообщение от клиента:\n\nПользователь: ${userName}\nID: ${userId}\n${userContent}`;
+
+            return bot.sendMessage(adminChatId, adminMessage);
+        }).then(() => {
+            bot.sendMessage(chatId, 'Спасибо за заявку! Открытка уже в разработке... Наши менеджеры свяжутся с вами в ближайшее время.');
+        }).catch((error) => {
+            console.error('Ошибка при получении файла:', error);
+            bot.sendMessage(chatId, 'Произошла ошибка при обработке фото. Пожалуйста, попробуйте отправить снова.');
+        });
+
+        return; // Прерываем основный поток, чтобы не дублировать отправку
+    }
+
+    // Если это не фото — отправляем обычное текстовое сообщение
+    if (chatId.toString() !== adminChatId && !msg.photo) {
+        const adminMessage = `🔔 Новое сообщение от клиента:\n\nПользователь: ${userName}\nID: ${userId}\n${userContent}`;
+
         bot.sendMessage(adminChatId, adminMessage)
-            .then(() => bot.sendMessage(chatId, 'Спасибо за заявку! Открытка уже в разработке... Наши менеджеры свяжутся с вами в ближайшее время.'))
+            .then(() => {
+                bot.sendMessage(chatId, 'Спасибо за заявку! Открытка уже в разработке... Наши менеджеры свяжутся с вами в ближайшее время.');
+            })
             .catch((error) => {
                 console.error('Ошибка при отправке администратору:', error);
                 bot.sendMessage(chatId, 'Произошла ошибка при обработке заявки. Пожалуйста, попробуйте позже.');
