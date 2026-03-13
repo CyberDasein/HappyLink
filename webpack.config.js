@@ -37,10 +37,12 @@ function generateEntriesAndPlugins() {
   // Обрабатываем новые карточки - только генерируем пути
   newCards.forEach((card, index) => {
     // Генерируем путь для новых карточек
-    const entryName = generateRandomPath(card.path, index);
-    card.generatedPath = entryName;
+    if (!card.generatedPath) {
+      const entryName = generateRandomPath(card.path, index);
+      card.generatedPath = entryName;
+    }
     updatedNewCards = true;
-    console.log(`🆕 Новый путь для ${card.path}: ${entryName}`);
+    console.log(`🆕 Новый путь для ${card.path}: ${card.generatedPath}`);
   });
 
   // Сохраняем обновленные данные
